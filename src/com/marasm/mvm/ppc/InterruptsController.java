@@ -10,7 +10,7 @@ public class InterruptsController
 
     static Queue<Variable>intQ=new LinkedList<>();//interrupts queue
     static Map<String,String>handlers=new HashMap<>();
-    static Stack<Variable> params=new Stack<>();
+    //static Stack<Variable> params=new Stack<>();
 
     public static final Variable int_Arithmetic = new Variable(0);
 
@@ -35,10 +35,10 @@ public class InterruptsController
             handlers.remove(_int.toString());
         }
     }
-    public static void push(Variable v){params.push(v);}
-    public static Variable pop(Variable v){return params.pop();}
-    public static Stack<Variable> getParams(){return params;}
-    public static void emptyParams(){params=new Stack<>();}
+    //public static void push(Variable v){params.push(v);}
+    //public static Variable pop(Variable v){return params.pop();}
+    //public static Stack<Variable> getParams(){return params;}
+    //public static void emptyParams(){params=new Stack<>();}
     public static Queue<Variable> getIntQ(){return intQ;}
     public static void emptyIntQ(){intQ=new LinkedList<>();}
 }
