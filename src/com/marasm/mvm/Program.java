@@ -30,6 +30,11 @@ public class Program
         filesLoaded=new HashMap<>();
         initializationFunctions=new ArrayList<>();
     }
+    public Program(String path)
+    {
+        this();
+        loadFile(path);
+    }
     public String toString()
     {
         String str=new String();
@@ -81,7 +86,8 @@ public class Program
         }
         for(int i=0;i<file.size();i++){file.set(i, file.get(i).trim());}
         JSONObject fileInfo=loadFileHeader(file);
-        if(fileInfo==null){Log.error("Failed to load header from file "+path);}
+        fileInfo.append("fileBegin",program.size());
+        if(fileInfo==null){Log.error("In file "+path+"\nFailed to load header from file "+path);}
         try{initializationFunctions.add(fileInfo.getString("init"));}catch (JSONException e){}
         try{
             JSONArray deps=fileInfo.getJSONArray("dependencies");
@@ -94,9 +100,19 @@ public class Program
         ArrayList<Command>cmds=new ArrayList<>();
         for (int i=0;i<file.size();i++)
         {
-            cmds.add(new Command(file.get(i)));
+            Command tmp=new Command(file.get(i));
+            if(tmp.name.startsWith("$")){
+                if(functions.get(tmp.name)!=null){Log.error("In file "+path+"\ndublicated function '"+tmp.name+"'");}
+                functions.put(tmp.name,new Long(i+program.size()));
+            }else if(tmp.name.startsWith("@")) {
+                if(tags.get(tmp.name)!=null){Log.error("In file "+path+"\ndublicated tag '"+tmp.name+"'");}
+                tags.put(tmp.name, new Long(i + program.size()));
+            }
+            cmds.add(tmp);
         }
         program.addAll(cmds);
+        fileInfo.append("fileEnd",program.size());
+        filesLoaded.put(path,fileInfo);
     }
     public JSONObject loadFileHeader(ArrayList<String>file)
     {
@@ -130,5 +146,34 @@ public class Program
         {
             return null;
         }
+    }
+    public Command getCommand(long pc)
+    {
+        if(pc>program.size()){Log.error("program counter "+pc+" is out of bounds!");return null;}
+        return program.get((int) pc);
+    }
+    public long getFun(String fun)
+    {
+        Long f=functions.get(fun);
+        if(f==null)
+        {
+            Log.error("function '"+fun+"' is not loaded");
+            return 0;
+        }
+        return f.longValue();
+    }
+    public long getTag(String tag)
+    {
+        Long t=tags.get(tag);
+        if(t==null)
+        {
+            Log.error("function '"+tag+"' is not loaded");
+            return 0;
+        }
+        return t.longValue();
+    }
+    public long size()
+    {
+        return program.size();
     }
 }

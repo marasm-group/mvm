@@ -49,10 +49,13 @@ public class Variable
     }
     public Variable floor()
     {
-        return new Variable(value.setScale(0,BigDecimal.ROUND_FLOOR));
+        return new Variable(value.setScale(0, BigDecimal.ROUND_FLOOR));
     }
     public Variable ceil()
     {
         return new Variable(value.setScale(0,BigDecimal.ROUND_CEILING));
     }
+    public boolean isEqual(Variable v) {return  value.compareTo(v.value)==0;}
+    public boolean isBigger(Variable v){return  value.compareTo(v.value)>0;}
+    public boolean isSmaller(Variable v) {return value.compareTo(v.value) < 0;}
 }

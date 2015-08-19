@@ -16,4 +16,5 @@ public class Log
         System.out.println("WARNING: " + o.toString());
         if(eh!=null){eh.warning();}
     }
+    public static void trace(Object o){System.out.println("TRACE:\n" + o.toString());}
 }

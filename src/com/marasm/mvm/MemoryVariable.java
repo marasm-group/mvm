@@ -36,7 +36,7 @@ public class MemoryVariable
     }
     public String toString()
     {
-        if(arraySize==0){return get().toString();}
+        if(arraySize<2){return get().toString();}
         return vars.toString();
     }
 }

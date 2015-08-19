@@ -1,0 +1,112 @@
+;;  ;;
+;;  ;; MarAsm syntax:
+;;  ;; 
+;;  
+;;  ;;  ; is the begining of a comment, newline symbol is the end of it
+;;
+;;
+;;  ;;
+;;  ;; Header
+;;  ;;
+;;  ;; Every marasm program should contain one and only one json header
+;;  ;; header begins with the line '#json' and ends with the line '#end'
+;;  ;; like this:
+;;  #json
+;;  {
+;;     "author":"<author_name_goes_here>",
+;;     "dependencies":["<module1>","<module2>"]
+;;  }
+;;  #end
+;;  ;;  dependencies field is an array of names of modules needed to load yours (strings)
+;;  ;;  author field is author's name (string)
+;;
+;;  
+;;  ;; 
+;;  ;; In marasm vm memory management is hidden from the developer
+;;  ;; 
+;;  var <varname> ;; create local variable
+;;  gvar <varname> ;; create global variable
+;;  var <varname>[<size>] ;; create local variable array <size> may be a variable
+;;  gvar <varname>[<size>] ;; create global variable array <size> may be a variable
+;;  delv <varname> ;; delete local variable
+;;  delg <varname> ;; delete global variable
+;;  ;; variables store any number (integer or float) (see NSDecimalNumber class)
+;;  
+;;  
+;;  ;;
+;;  ;; constants
+;;  ;;
+;;  ;; numeric constants must be in decimal representation (10, 25.5, etc...)
+;;  ;; '<char>' may be used as numeric constant, it will be replaced by <char> integer value ('A' => 65, 'B' => 66, etc...)
+;;  ;;
+;;  
+;;  ;;
+;;  ;; tags
+;;  ;;
+;;  @<tagname> ;; tag <tagname> declaration
+;;  
+;;  ;;
+;;  ;; functions
+;;  ;;
+;;  fun: <funcname> ;; function <funcname> declaration
+;;  
+;;  ;; 
+;;  ;; instructions:
+;;  ;;
+;;  nop ;; no operation (empty cmd)
+;;  mov <res> <v> ;; <res> =  <v1>; ;;  <res> must be a variable, <v> may be a numeric constant
+;;  add <res> <v1> <v2> ;;  <res> = <v1> + <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  sub <res> <v1> <v2> ;;  <res> = <v1> - <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  mul <res> <v1> <v2> ;;  <res> = <v1> * <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  div <res> <v1> <v2> ;;  <res> = <v1> / <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  ;;
+;;  floor <res> <v> ;;  <res> = floor(<v>); ;;  <res> must be a variable, <v> may be numeric constants
+;;  ceil <res> <v>  ;;  <res> = ceiling(<v>); ;;  <res> must be a variable, <v> may be numeric constants
+;;  ;;
+;;  push <v> ;; push <v> to stack ;; <v> may be a numeric constant
+;;  pop <v>  ;; push <v> to stack ;; <v> must be a variable
+;;  ;;
+;;  call $<func>   ;; call <func> function
+;;  ret            ;; return from function
+;;  ;;
+;;  jmp @<tag>      ;; unconditional jump to <tag> tag
+;;  jz <v> @<tag>   ;; jump to <tag> tag if v==0 ;; <v> may be a numeric constant
+;;  jnz <v> @<tag>  ;; jump to <tag> tag if v!=0 ;; <v> may be a numeric constant
+;;  jmz <v> @<tag>  ;; jump to <tag> tag if v>0  ;; <v> may be a numeric constant
+;;  jlz <v> @<tag>  ;; jump to <tag> tag if v<0  ;; <v> may be a numeric constant
+;;  ;;
+;;  in <res> <port> ;; input data from <port> port to <res> ;; <res> must be a variable, <port> may be a numeric constant
+;;  out <port> <data>  ;; output <data> to port <port> ;; <port> and <data> may be numeric constants
+;;  ;;
+;;  setint <v> $<func> ;; set interrupt <v> handler to a function <func> ;; <v> may be a numeric constant
+;;  int <v> ;; force generate interrupt <v>  ;; <v> may be a numeric constant
+;;  rmint <v> ;; remove interrupt <v> ;; <v> may be a numeric constant
+;;  ;;
+;;  sleep <v> ;; sleep <v> milliseconds ;; <v> may be a numeric constant
+;;  halt <v>  ;; abort execution with code <v> ;; <v> may be a numeric constant
+;;
+;;  trace    ;; print current state (debug only)
+;;  log <v>  ;; print variable <v> value in format nameof(<v>)=valueof(<v>) (debug only)
+;;  ;;
+;;  ;; example:
+;;  ;;
+;;
+#json
+  {
+     "author":"old_marasmatic",
+     "dependencies":[]
+  }
+#end
+var a          ; allocate variable a
+mov a 10       ; a=10
+var b          ; allocate variable b
+mov b 1.5      ; b=1.5
+gvar x[10]     ; allocate global variable x as array of 10 elements (x[0]...x[9])
+add x[0] a b   ; x[0]=a+b (should be 11.5)
+delv a         ; delete variable a
+delv b         ; delete variable b
+call $sample_function
+halt x[0]      ; abort with code x[0] (11.5)
+fun: sample_function
+var a
+ret

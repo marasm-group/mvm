@@ -2,6 +2,7 @@ package com.marasm.mvm;
 
 import com.marasm.mvm.ppc.Variable;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -23,7 +24,23 @@ public class Memory
     }
     public String toString()
     {
-        return vars.toString()+"\n"+gvars.toString();
+        String res=new String();
+        res+="Local:\n";
+        for (Map.Entry<String, MemoryVariable> mv : vars.entrySet())
+            res+="\t"+mv.getKey()+"="+mv.getValue().toString()+"\n";
+        res+="Global:\n";
+        for (Map.Entry<String, MemoryVariable> mv : gvars.entrySet())
+            res+="\t"+mv.getKey()+"="+mv.getValue().toString()+"\n";
+        return res;
+    }
+    public void push()
+    {
+        varsStack.push(vars);
+        vars=new HashMap<>();
+    }
+    public void pop()
+    {
+        vars=varsStack.pop();
     }
     int ArraySize(String varname)
     {
@@ -115,5 +132,17 @@ public class Memory
         }
         Log.error("Variable '"+oldVarName+"' does not exist!");
         return;
+    }
+    public Variable getValue(String str)
+    {
+        try
+        {
+            BigDecimal bd=new BigDecimal(str);
+            return new Variable(bd);
+        }
+        catch (NumberFormatException e)
+        {
+            return Get(str);
+        }
     }
 }

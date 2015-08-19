@@ -11,9 +11,9 @@ public class Utils
     {
         return Main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
-    public static String jarLocation()
+    public static String jarLocation(Class c)
     {
-        return mainJarLocation();
+        return c.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
     public static String marasmHome()
     {
