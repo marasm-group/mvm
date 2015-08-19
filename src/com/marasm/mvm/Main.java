@@ -19,7 +19,9 @@ public class Main implements ErrorHandler {
         try {
             cmd = parser.parse( options, args);
         } catch (ParseException e) {
-            e.printStackTrace();
+            HelpFormatter formatter = new HelpFormatter();
+            formatter.printHelp("mvm", options);
+            System.exit(127);
         }
         if(cmd.hasOption("h"))
         {
