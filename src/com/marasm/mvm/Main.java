@@ -7,6 +7,7 @@ import org.apache.commons.cli.*;
 public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
+    static boolean debug=false;
     Main(){}
     public static void main(String[] args) {
         Options options=new Options();
@@ -37,6 +38,10 @@ public class Main implements ErrorHandler {
         Log.info("Marasm home: " + Utils.marasmHome());
         Log.info("Marasm modules: " + Utils.marasmModules());
         Log.info("Marasm devices: " + Utils.marasmDevices());
+        if(cmd.hasOption("D"))
+        {
+            debug=true;
+        }
         if(cmd.hasOption("e"))
         {
             execute(cmd.getOptionValue("e"));
@@ -52,6 +57,7 @@ public class Main implements ErrorHandler {
     {
         Program p=new Program(path);
         cpu=new CPU(p);
+        cpu.debug=debug;
         while (cpu.programcounter<cpu.program.size())
         {
             long oldPC=cpu.programcounter;
