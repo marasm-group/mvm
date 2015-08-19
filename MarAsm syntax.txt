@@ -48,7 +48,7 @@
 ;;  ;;
 ;;  ;; functions
 ;;  ;;
-;;  fun: <funcname> ;; function <funcname> declaration
+;;  $<funcname> ;; function <funcname> declaration
 ;;  
 ;;  ;; 
 ;;  ;; instructions:
@@ -107,6 +107,6 @@ delv a         ; delete variable a
 delv b         ; delete variable b
 call $sample_function
 halt x[0]      ; abort with code x[0] (11.5)
-fun: sample_function
+$sample_function
 var a
 ret
