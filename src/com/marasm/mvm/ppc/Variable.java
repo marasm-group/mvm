@@ -33,19 +33,35 @@ public class Variable
     public double doubleValue(){return value.doubleValue();}
     public Variable add(Variable v)
     {
-        return  new Variable(value.add(v.value));
+        try{return  new Variable(value.add(v.value));}
+        catch (ArithmeticException e){
+            InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
+            return new Variable();
+        }
     }
     public Variable sub(Variable v)
     {
-        return  new Variable(value.subtract(v.value));
+        try{return  new Variable(value.subtract(v.value));}
+        catch (ArithmeticException e){
+            InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
+            return new Variable();
+        }
     }
     public Variable mul(Variable v)
     {
-        return  new Variable(value.multiply(v.value));
+        try{return  new Variable(value.multiply(v.value));}
+        catch (ArithmeticException e){
+            InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
+            return new Variable();
+        }
     }
     public Variable div(Variable v)
     {
-        return  new Variable(value.divide(v.value));
+        try{return  new Variable(value.divide(v.value));}
+        catch (ArithmeticException e){
+            InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
+            return new Variable();
+        }
     }
     public Variable floor()
     {

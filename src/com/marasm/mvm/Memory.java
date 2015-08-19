@@ -1,5 +1,6 @@
 package com.marasm.mvm;
 
+import com.marasm.mvm.ppc.Log;
 import com.marasm.mvm.ppc.Variable;
 
 import java.math.BigDecimal;
@@ -49,7 +50,8 @@ public class Memory
         String ars="0";
         ars=varname.substring(idx);
         idx = varname.lastIndexOf("]");
-        if (idx== -1){Log.error("No ']' found for '['");return 0;}
+        if (idx== -1){
+            Log.error("No ']' found for '['");return 0;}
         ars=ars.substring(0,idx).trim();
         try {
             ars=ars.replace("[","");

@@ -1,5 +1,6 @@
 package com.marasm.mvm;
 
+import com.marasm.mvm.ppc.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,14 +88,18 @@ public class Program
         }
         catch (IOException e)
         {
-            Log.error(e.toString()+"\n"+e.getLocalizedMessage()+"\n"+e.getStackTrace().toString());
+            Log.error(e.toString() + "\n" + e.getLocalizedMessage() + "\n" + e.getStackTrace().toString());
             return;
         }
         for(int i=0;i<file.size();i++){file.set(i, file.get(i).trim());}
         JSONObject fileInfo=loadFileHeader(file);
         fileInfo.append("fileBegin",new Long(program.size()));
         if(fileInfo==null){Log.error("In file "+path+"\nFailed to load header from file "+path);}
-        try{initializationFunctions.add(fileInfo.getString("init"));}catch (JSONException e){}
+        try{
+            String ifun=fileInfo.getString("init");
+            if(ifun.length()>0)
+                initializationFunctions.add(ifun);
+        }catch (JSONException e){}
         //TODO check devices
         ArrayList<Command>cmds=new ArrayList<>();
         for (int i=0;i<file.size();i++)

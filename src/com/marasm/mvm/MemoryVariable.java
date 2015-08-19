@@ -1,5 +1,6 @@
 package com.marasm.mvm;
 
+import com.marasm.mvm.ppc.Log;
 import com.marasm.mvm.ppc.Variable;
 
 /**
@@ -22,7 +23,8 @@ public class MemoryVariable
     Variable get(){return vars[0];}
     Variable get(int idx)
     {
-        if(idx>arraySize){Log.error("Index "+idx+" is out of bounds!");return vars[0];}
+        if(idx>arraySize){
+            Log.error("Index " + idx + " is out of bounds!");return vars[0];}
         return vars[idx];
     }
     void set(Variable v)

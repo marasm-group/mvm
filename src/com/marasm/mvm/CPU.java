@@ -1,9 +1,8 @@
 package com.marasm.mvm;
 
-import com.marasm.mvm.ppc.Console;
-import com.marasm.mvm.ppc.PPC;
-import com.marasm.mvm.ppc.Variable;
+import com.marasm.mvm.ppc.*;
 
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -24,6 +23,8 @@ public class CPU
         program=p;
         stack=new Stack<>();
         callStack=new Stack<>();
+        for(String fun : p.initializationFunctions)
+            call(fun);
     }
 
     void nop(){}
@@ -33,7 +34,7 @@ public class CPU
     void delg(String v){mem.gDeallocate(v);}
     void mov(String res,String v)
     {
-        mem.Set(res,mem.getValue(v));
+        mem.Set(res, mem.getValue(v));
     }
     void add(String res,String v1,String v2)
     {
@@ -95,12 +96,10 @@ public class CPU
     {
         PPC.out(mem.getValue(port), mem.getValue(data));
     }
-    void setint(String _int,String fun)
-    {}
-    void _int(String _int)
-    {}
-    void rmint(String _int)
-    {}
+    void setint(String _int,String fun){InterruptsController.SetInterruptHandler(mem.getValue(_int), fun);}
+    void _int(String _int){InterruptsController.Interrupt(mem.getValue(_int));}
+
+    void rmint(String _int){InterruptsController.RemoveInterruptHandler(mem.getValue(_int));}
     void sleep(String v)
     {//TODO make sleep work with interrupts
         Log.warning("sleep is not properly implemented yed");
@@ -118,7 +117,7 @@ public class CPU
     }
     void log(String v)
     {
-        Log.info(v+"=" + mem.getValue(v));
+        Log.info(v + "=" + mem.getValue(v));
     }
     String Trace()
     {   //TODO full trace
@@ -129,7 +128,9 @@ public class CPU
         res+="Call stack: size="+callStack.size()+"\n";
         for(Long pc : callStack)
         {
-            res+=program.getCommand(pc).args[0]+"\n";
+            Command cmd=program.getCommand(pc);
+            if(cmd.args.length>0)
+                res+=cmd.args[0]+"\n";
         }res+="\n";
         res+="Variables:\n"+mem.toString()+"\n";
         res+="Modules loaded: "+program.filesLoaded.toString();
@@ -152,13 +153,13 @@ public class CPU
                     add(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
                 case "sub":
-                    add(cmd.args[0],cmd.args[1],cmd.args[2]);
+                    sub(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
                 case "mul":
-                    add(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    mul(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
                 case "div":
-                    add(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    div(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
                 case "floor":
                     floor(cmd.args[0], cmd.args[1]);
@@ -238,6 +239,18 @@ public class CPU
             }
         }catch (ArrayIndexOutOfBoundsException e){
             Log.error("Too few arguments for '"+cmd.name+"'");
+        }
+        processInterrupts();
+    }
+    void processInterrupts()
+    {
+        Queue<Variable>intQ=InterruptsController.getIntQ();
+        if(intQ.size()==0){return;}
+        while (intQ.size()>0)
+        {
+            Variable v=intQ.poll();
+            String handler=InterruptsController.GetInterruptHandler(v);
+            if(handler!=null){call(handler);}
         }
     }
 }

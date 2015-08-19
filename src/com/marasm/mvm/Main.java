@@ -1,5 +1,8 @@
 package com.marasm.mvm;
 
+import com.marasm.mvm.ppc.ErrorHandler;
+import com.marasm.mvm.ppc.Log;
+
 public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
@@ -18,12 +21,12 @@ public class Main implements ErrorHandler {
     {
         Program p=new Program(path);
         cpu=new CPU(p);
-        cpu.programcounter=0;
         while (cpu.programcounter<cpu.program.size())
         {
             long oldPC=cpu.programcounter;
             cpu.exec(cpu.program.getCommand(cpu.programcounter));
             if(cpu.programcounter==oldPC){cpu.programcounter++;}
+
         }
     }
 
