@@ -124,6 +124,8 @@ public class CPU
     {   //TODO full trace
         String res=new String();
         res+="CMD: "+program.getCommand(programcounter)+"\n";
+        res+="File: "+program.getFileName(programcounter)+"\n";
+        res+="Line: "+(program.getLineInFile(programcounter)+1)+"\n";
         res+="Call stack:\n";
         for(Long pc : callStack)
         {

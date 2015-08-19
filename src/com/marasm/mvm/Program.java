@@ -45,7 +45,9 @@ public class Program
         }
         return str;
     }
-     ArrayList<String> readLines(String filename) throws IOException {
+    public long size(){return program.size();}
+    ArrayList<String> readLines(String filename) throws IOException
+    {
         FileReader fileReader = new FileReader(filename);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> lines = new ArrayList<String>();
@@ -65,6 +67,10 @@ public class Program
         if(name.startsWith("."))
         {
             name=Utils.workingDir()+name.substring(1);
+        }
+        if(name.startsWith("~"))
+        {
+            name=Utils.homeDir()+name.substring(1);
         }
         else
         {
@@ -86,16 +92,9 @@ public class Program
         }
         for(int i=0;i<file.size();i++){file.set(i, file.get(i).trim());}
         JSONObject fileInfo=loadFileHeader(file);
-        fileInfo.append("fileBegin",program.size());
+        fileInfo.append("fileBegin",new Long(program.size()));
         if(fileInfo==null){Log.error("In file "+path+"\nFailed to load header from file "+path);}
         try{initializationFunctions.add(fileInfo.getString("init"));}catch (JSONException e){}
-        try{
-            JSONArray deps=fileInfo.getJSONArray("dependencies");
-            for(int i=0;i<deps.length();i++)
-            {
-                loadModule(deps.getString(i));
-            }
-        }catch (JSONException e){}
         //TODO check devices
         ArrayList<Command>cmds=new ArrayList<>();
         for (int i=0;i<file.size();i++)
@@ -111,8 +110,15 @@ public class Program
             cmds.add(tmp);
         }
         program.addAll(cmds);
-        fileInfo.append("fileEnd",program.size());
+        fileInfo.append("fileEnd", new Long(program.size()));
         filesLoaded.put(path,fileInfo);
+        try{
+            JSONArray deps=fileInfo.getJSONArray("dependencies");
+            for(int i=0;i<deps.length();i++)
+            {
+                loadModule(deps.getString(i));
+            }
+        }catch (JSONException e){}
     }
     public JSONObject loadFileHeader(ArrayList<String>file)
     {
@@ -138,8 +144,8 @@ public class Program
                 jsonStr+=headerStr.get(j);
             }
             JSONObject header=new JSONObject(jsonStr);
-            header.append("headerBegin",headerBegin);
-            header.append("headerEnd",headerEnd);
+            header.append("headerBegin",new Long(headerBegin));
+            header.append("headerEnd",new Long(headerEnd));
             return header;
         }
         catch(JSONException e)
@@ -172,8 +178,37 @@ public class Program
         }
         return t.longValue();
     }
-    public long size()
+    public String getFileName(long pc)
     {
-        return program.size();
+        for (Map.Entry<String, JSONObject> entry : filesLoaded.entrySet())
+        {
+            JSONObject f=entry.getValue();
+            long fileBegin=f.getJSONArray("fileBegin").getLong(0);
+            long fileEnd=f.getJSONArray("fileEnd").getLong(0);
+            if(pc>=fileBegin&&pc<fileEnd)
+            {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+    public long getLineInFile(long pc)
+    {
+        for (Map.Entry<String, JSONObject> entry : filesLoaded.entrySet())
+        {
+            JSONObject f=entry.getValue();
+            long fileBegin=f.getJSONArray("fileBegin").getLong(0);
+            long fileEnd=f.getJSONArray("fileEnd").getLong(0);
+            if(pc>=fileBegin&&pc<fileEnd)
+            {
+                long headerBegin=f.getJSONArray("headerBegin").getLong(0);
+                long headerEnd=f.getJSONArray("headerEnd").getLong(0);
+                long line=pc-fileBegin;
+                if(line<headerBegin){return line;}
+                line+=headerEnd-headerBegin+1;
+                return line;
+            }
+        }
+        return 0;
     }
 }
