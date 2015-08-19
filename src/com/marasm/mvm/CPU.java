@@ -15,7 +15,7 @@ public class CPU
     Stack<Long> callStack;
     Program program;
     public long programcounter=0;
-
+    public boolean debug=false;
     public CPU(Program p)
     {
         programcounter=0;
@@ -111,14 +111,8 @@ public class CPU
         Console.println("halt with code: " + mem.getValue(v));
         System.exit(mem.getValue(v).intValue());
     }
-    void trace()
-    {
-        Log.trace(Trace());
-    }
-    void log(String v)
-    {
-        Log.info(v + "=" + mem.getValue(v));
-    }
+    void trace(){if(debug){Log.trace(Trace());}}
+    void log(String v){if(debug){Log.info(v + "=" + mem.getValue(v));}}
     String Trace()
     {   //TODO full trace
         String res=new String();
