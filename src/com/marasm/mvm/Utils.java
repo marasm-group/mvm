@@ -15,7 +15,7 @@ public class Utils
     {
         return c.getProtectionDomain().getCodeSource().getLocation().getPath();
     }
-    public static String homeDir(){return System.getProperty("user.home");}
+    public static String homeDir(){return System.getProperty("user.home")+"/";}
     public static String marasmHome()
     {
         return mainJarLocation();

@@ -66,11 +66,11 @@ public class Program
         }
         if(name.startsWith("."))
         {
-            name=Utils.workingDir()+name.substring(1);
+            name=Utils.workingDir()+name.substring(2);
         }
         if(name.startsWith("~"))
         {
-            name=Utils.homeDir()+name.substring(1);
+            name=Utils.homeDir()+name.substring(2);
         }
         else
         {

@@ -8,6 +8,7 @@ public class Main implements ErrorHandler {
         instance=new Main();
         Log.setErrorHandler(instance);
         Log.info("Working directory: " + Utils.workingDir());
+        Log.info("User home directory: " + Utils.homeDir());
         Log.info("Marasm home: " + Utils.marasmHome());
         Log.info("Marasm modules: " + Utils.marasmModules());
         Log.info("Marasm devices: " + Utils.marasmDevices());
