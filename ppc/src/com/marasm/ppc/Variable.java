@@ -58,7 +58,7 @@ public class Variable
     }
     public Variable div(Variable v)
     {
-        try{return  new Variable(value.divide(v.value, RoundingMode.HALF_UP));}
+        try{return  new Variable(value.divide(v.value,32,RoundingMode.HALF_UP));}
         catch (ArithmeticException e){
             InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
             return new Variable();

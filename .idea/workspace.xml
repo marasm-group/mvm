@@ -2,32 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="ppc:jar" />
+      <artifact name="mvm:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/CTRL.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPCUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Utils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/ppc_jar.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/Utils.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/CPU.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/Command.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Command.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/Main.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/Memory.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/MemoryVariable.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/MemoryVariable.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/Program.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Program.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/Console.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Console.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/ErrorHandler.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/ErrorHandler.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/InterruptsController.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/InterruptsController.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/Log.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Log.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/PPC.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPC.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/PPCDevice.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPCDevice.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/ppc/Variable.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvm.iml" afterPath="$PROJECT_DIR$/mvm.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/mvm_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/mvm_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mvm.iws" />
@@ -53,8 +36,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31066176">
-              <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+            <state vertical-scroll-proportion="0.19301471">
+              <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+              <caret line="76" column="79" selection-start-line="76" selection-start-column="79" selection-end-line="76" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,16 +90,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PPCDevice.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPCDevice.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -216,8 +189,8 @@
         <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPCUtils.java" />
         <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPC.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Utils.java" />
-        <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Command.java" />
+        <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java" />
       </list>
     </option>
@@ -458,19 +431,20 @@
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="dynamic.classpath" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="true" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="com.marasm.mvm.main.Main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="-D -e &quot;$USER_HOME$/test.marasm&quot;" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -578,7 +552,7 @@
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/ppc_jar/ppc.jar" />
+      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/mvm_jar/mvm.jar" />
       <envs />
       <method />
     </configuration>
@@ -641,7 +615,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -650,7 +624,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39976552" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942554" sideWeight="0.50555557" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942554" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -658,8 +632,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942554" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942554" sideWeight="0.49444443" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -694,19 +668,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ppc/src/com/marasm/ppc/PPC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
-          <folding>
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1121,16 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Command.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1162,10 +1113,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="79" selection-start-line="76" selection-start-column="79" selection-end-line="76" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31066176">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.19301471">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

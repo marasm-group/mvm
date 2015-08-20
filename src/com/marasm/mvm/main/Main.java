@@ -9,7 +9,6 @@ public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
     static boolean debug=true;
-    Main(){}
     public static void main(String[] args) {
         Options options=new Options();
         options.addOption("e",true,"marASM executable file");
@@ -75,4 +74,5 @@ public class Main implements ErrorHandler {
         else{System.exit(-1);}
     }
     public void warning(){}
+    Main(){}
 }
