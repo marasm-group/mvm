@@ -7,7 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/main/Utils.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mvm.iws" />
     <ignored path=".idea/workspace.xml" />
