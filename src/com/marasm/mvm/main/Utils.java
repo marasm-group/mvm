@@ -16,7 +16,7 @@ public class Utils
     {
         return new File(c.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsoluteFile().getParent();
     }
-    public static String homeDir(){return System.getProperty("user.home")+"/";}
+    public static String homeDir(){return System.getProperty("user.home")+File.separator;}
     public static String marasmHome()
     {
         return mainJarLocation();
@@ -25,17 +25,17 @@ public class Utils
     {
         String home=marasmHome();
         String tmp=home.substring(home.length()-1);
-        if(!tmp.equals("/"))
-            home+="/";
-        return home+"modules/";
+        if(!tmp.equals(File.separator))
+            home+=File.separator;
+        return home+"modules"+File.separator;
     }
     public static String marasmDevices()
     {
         String home=marasmHome();
         String tmp=home.substring(home.length() - 1);
-        if(!tmp.equals("/"))
-            home+="/";
-        return home+"devices/";
+        if(!tmp.equals(File.separator))
+            home+=File.separator;
+        return home+"devices"+File.separator;
     }
     public static String workingDir()
     {
