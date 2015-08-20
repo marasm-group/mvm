@@ -43,11 +43,11 @@ public class Utils
     }
     public static String unescape(String str)
     {
-        str=str.replaceAll("\\\\","\\");
-        str=str.replaceAll("\\n","\n");
-        str=str.replaceAll("\\r","\r");
-        str=str.replaceAll("\\\"","\"");
-        str=str.replaceAll("\\\'","\'");
+        str = str.replaceAll("\\\\n", "\n");
+        str = str.replaceAll("\\\\r", "\r");
+        str = str.replaceAll("\\\\\"", "\"");
+        str = str.replaceAll("\\\\'", "\'");
+        str = str.replaceAll("\\\\\\\\", "\\");
         return str;
     }
 }

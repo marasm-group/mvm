@@ -1,7 +1,9 @@
 package com.marasm.ppc;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -46,6 +48,22 @@ public class PPCUtils {
         }
         return res.toArray(new String[res.size()]);
     }
+    public static void enableFullScreenMode(Window window) {
+        if(!isMacOSX()){return;}
+        String className = "com.apple.eawt.FullScreenUtilities";
+        String methodName = "setWindowCanFullScreen";
 
-
+        try {
+            Class<?> clazz = Class.forName(className);
+            Method method = clazz.getMethod(methodName, new Class<?>[] {
+                    Window.class, boolean.class });
+            method.invoke(null, window, true);
+        } catch (Throwable t) {
+            System.err.println("Full screen mode is not supported");
+            t.printStackTrace();
+        }
+    }
+    private static boolean isMacOSX() {
+        return System.getProperty("os.name").indexOf("Mac OS X") >= 0;
+    }
 }
