@@ -1,6 +1,6 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
-import com.marasm.mvm.ppc.*;
+import com.marasm.ppc.*;
 
 import java.util.Queue;
 import java.util.Stack;

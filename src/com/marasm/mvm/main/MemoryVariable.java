@@ -1,7 +1,7 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
-import com.marasm.mvm.ppc.Log;
-import com.marasm.mvm.ppc.Variable;
+import com.marasm.ppc.Log;
+import com.marasm.ppc.Variable;
 
 /**
  * Created by sr3u on 19.08.15.

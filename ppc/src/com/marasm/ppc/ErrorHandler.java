@@ -1,4 +1,4 @@
-package com.marasm.mvm.ppc;
+package com.marasm.ppc;
 
 /**
  * Created by sr3u on 19.08.15.

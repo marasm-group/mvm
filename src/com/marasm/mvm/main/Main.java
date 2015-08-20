@@ -1,13 +1,14 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
-import com.marasm.mvm.ppc.ErrorHandler;
-import com.marasm.mvm.ppc.Log;
+import com.marasm.ppc.ErrorHandler;
+import com.marasm.ppc.Log;
+import com.marasm.ppc.PPC;
 import org.apache.commons.cli.*;
 
 public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
-    static boolean debug=false;
+    static boolean debug=true;
     Main(){}
     public static void main(String[] args) {
         Options options=new Options();
@@ -33,11 +34,6 @@ public class Main implements ErrorHandler {
         instance=new Main();
 
         Log.setErrorHandler(instance);
-        Log.info("Working directory: " + Utils.workingDir());
-        Log.info("User home directory: " + Utils.homeDir());
-        Log.info("Marasm home: " + Utils.marasmHome());
-        Log.info("Marasm modules: " + Utils.marasmModules());
-        Log.info("Marasm devices: " + Utils.marasmDevices());
         if(cmd.hasOption("D"))
         {
             debug=true;
@@ -55,6 +51,12 @@ public class Main implements ErrorHandler {
     }
     static void execute(String path)
     {
+        Log.info("Working directory: " + Utils.workingDir());
+        Log.info("User home directory: " + Utils.homeDir());
+        Log.info("Marasm home: " + Utils.marasmHome());
+        Log.info("Marasm modules: " + Utils.marasmModules());
+        Log.info("Marasm devices: " + Utils.marasmDevices());
+        PPC.LoadDevices(Utils.marasmDevices());
         Program p=new Program(path);
         cpu=new CPU(p);
         cpu.debug=debug;

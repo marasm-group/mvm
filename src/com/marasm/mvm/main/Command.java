@@ -1,4 +1,4 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
 /**
  * Created by sr3u on 19.08.15.
@@ -23,6 +23,17 @@ public class Command
         args=new String[arr.length-1];
         for(int i=1;i<arr.length;i++)
         {
+            if(arr[i].equals("'"))
+            {
+                if(i<arr.length-1)
+                {
+                    if (arr[i + 1].equals("'"))
+                    {
+                        args[i-1]="'  '";
+                        continue;
+                    }
+                }
+            }
             args[i-1]=arr[i];
         }
     }

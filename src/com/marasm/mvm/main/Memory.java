@@ -1,7 +1,7 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
-import com.marasm.mvm.ppc.Log;
-import com.marasm.mvm.ppc.Variable;
+import com.marasm.ppc.Log;
+import com.marasm.ppc.Variable;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -144,6 +144,11 @@ public class Memory
         }
         catch (NumberFormatException e)
         {
+            if(str.substring(0,1).equals("'"))
+            {
+                str=Utils.unescape(str);
+                return Variable.Character(str);
+            }
             return Get(str);
         }
     }

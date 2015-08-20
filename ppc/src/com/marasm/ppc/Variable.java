@@ -1,6 +1,7 @@
-package com.marasm.mvm.ppc;
+package com.marasm.ppc;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by sr3u on 19.08.15.
@@ -57,7 +58,7 @@ public class Variable
     }
     public Variable div(Variable v)
     {
-        try{return  new Variable(value.divide(v.value));}
+        try{return  new Variable(value.divide(v.value, RoundingMode.HALF_UP));}
         catch (ArithmeticException e){
             InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
             return new Variable();
@@ -74,4 +75,9 @@ public class Variable
     public boolean isEqual(Variable v) {return  value.compareTo(v.value)==0;}
     public boolean isBigger(Variable v){return  value.compareTo(v.value)>0;}
     public boolean isSmaller(Variable v) {return value.compareTo(v.value) < 0;}
+    public static Variable Character(String chr)
+    {
+        if(chr.length()==0){return new Variable();}
+        return new Variable(chr.getBytes()[1]);
+    }
 }

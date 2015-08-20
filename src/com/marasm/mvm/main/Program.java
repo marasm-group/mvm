@@ -1,6 +1,6 @@
-package com.marasm.mvm;
+package com.marasm.mvm.main;
 
-import com.marasm.mvm.ppc.Log;
+import com.marasm.ppc.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
