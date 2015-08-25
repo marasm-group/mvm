@@ -5,6 +5,8 @@ import com.marasm.ppc.Log;
 import com.marasm.ppc.PPC;
 import org.apache.commons.cli.*;
 
+import java.io.IOException;
+
 public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
@@ -59,18 +61,20 @@ public class Main implements ErrorHandler {
         Program p=new Program(path);
         cpu=new CPU(p);
         cpu.debug=debug;
-        while (cpu.programcounter<cpu.program.size())
+        while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())
         {
             long oldPC=cpu.programcounter;
             cpu.exec(cpu.program.getCommand(cpu.programcounter));
             if(cpu.programcounter==oldPC){cpu.programcounter++;}
-
         }
+        System.out.println("press return key to exit or just kill this process");
+        try {System.in.read();}
+        catch (IOException e) {e.printStackTrace();}
     }
 
     public void error()
     {
-        if(cpu!=null){Log.info(cpu.Trace());cpu.halt("-1");}
+        if(cpu!=null){Log.info(cpu.Trace());cpu.halt("-1");System.exit(-1);}
         else{System.exit(-1);}
     }
     public void warning(){}

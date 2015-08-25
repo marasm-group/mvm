@@ -16,6 +16,7 @@ public class CPU
     Program program;
     public long programcounter=0;
     public boolean debug=false;
+    boolean halted=false;
     public CPU(Program p)
     {
         programcounter=0;
@@ -26,6 +27,7 @@ public class CPU
         for(String fun : p.initializationFunctions)
             call(fun);
     }
+    public boolean isHalted(){return halted;}
 
     void nop(){}
     void var(String v){mem.Allocate(v);}
@@ -109,7 +111,8 @@ public class CPU
     void halt(String v)
     {
         Console.println("halt with code: " + mem.getValue(v));
-        System.exit(mem.getValue(v).intValue());
+        halted=true;
+        //System.exit(mem.getValue(v).intValue());
     }
     void trace(){if(debug){Log.trace(Trace());}}
     void log(String v)
