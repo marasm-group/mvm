@@ -62,14 +62,23 @@ public class Memory
             return Get(ars).intValue();
         }
     }
+    private boolean checkVar(String varname,Map<String,Variable> container)
+    {
+        if(container.get(varname)!=null){return true;}
+        if(container.get(varname+"[0]")!=null){return true;}
+        int idx = varname.indexOf("[");
+        if (idx== -1){return false;}
+        if(container.get(varname.substring(0,idx))!=null){return true;}
+        return false;
+    }
     public void Allocate(String varname)
     {
-        if(vars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
+        if(checkVar(varname,vars)){Log.error("Variable '" + varname.split("\\[")[0] + "' already exists!");return;}
         Allocate(varname,vars);
     }
     public void gAllocate(String varname){
-        if(vars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
-        if(gvars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
+        if(checkVar(varname,gvars)){Log.error("Variable '" + varname.split("\\[")[0] + "' already exists!");return;}
+        if(checkVar(varname,vars)){Log.error("Variable '" + varname.split("\\[")[0] + "' already exists!");return;}
         Allocate(varname, gvars);
 
     }

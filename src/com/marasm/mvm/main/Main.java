@@ -70,7 +70,7 @@ public class Main implements ErrorHandler {
 
     public void error()
     {
-        if(cpu!=null){cpu.Trace();cpu.halt("-1");}
+        if(cpu!=null){Log.info(cpu.Trace());cpu.halt("-1");}
         else{System.exit(-1);}
     }
     public void warning(){}
