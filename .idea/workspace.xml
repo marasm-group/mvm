@@ -6,12 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/main/MemoryVariable.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" afterPath="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="" />
     <ignored path="mvm.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />

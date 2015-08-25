@@ -1,0 +1,3 @@
+[submodule "Syntax Highlighting/tmLanguage"]
+	path = Syntax Highlighting/tmLanguage
+	url = https://SR3u@bitbucket.org/marasm/marasm.tmlanguage.git
