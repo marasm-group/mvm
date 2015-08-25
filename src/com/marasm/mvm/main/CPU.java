@@ -2,6 +2,7 @@ package com.marasm.mvm.main;
 
 import com.marasm.ppc.*;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -17,6 +18,8 @@ public class CPU
     public long programcounter=0;
     public boolean debug=false;
     boolean halted=false;
+    long interruptCalls=0;
+    Queue<Variable>intQ=new LinkedList<>();//interrupts queue
     public CPU(Program p)
     {
         programcounter=0;
@@ -75,12 +78,14 @@ public class CPU
         mem.push();
         callStack.push(programcounter);
         programcounter=program.getFun(fun);
+        if(interruptCalls>0){interruptCalls++;}
     }
     void ret()
     {
         mem.pop();
         programcounter=callStack.pop();
         programcounter++;
+        if(interruptCalls>0){interruptCalls--;}
     }
     void jmp(String tag)
     {
@@ -260,13 +265,15 @@ public class CPU
     }
     void processInterrupts()
     {
-        Queue<Variable>intQ=InterruptsController.getIntQ();
+        intQ.addAll(InterruptsController.getIntQ());
         if(intQ.size()==0){return;}
-        while (intQ.size()>0)
+        if(interruptCalls>0){return;}
+        Variable v=intQ.poll();
+        String handler=InterruptsController.GetInterruptHandler(v);
+        if(handler!=null)
         {
-            Variable v=intQ.poll();
-            String handler=InterruptsController.GetInterruptHandler(v);
-            if(handler!=null){call(handler);}
+            call(handler);
+            interruptCalls++;
         }
     }
 }
