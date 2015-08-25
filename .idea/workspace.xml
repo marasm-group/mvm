@@ -6,7 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="" />
+    <list default="true" id="715dd7d2-f8a7-40ed-981b-418cdd602e25" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java" afterPath="$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java" />
+    </list>
     <ignored path="mvm.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -64,12 +66,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CPU.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CPU.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.7794118">
+              <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+              <folding>
+                <element signature="e#1605#1606#0" expanded="true" />
+                <element signature="e#1646#1647#0" expanded="true" />
+                <element signature="e#1931#1932#0" expanded="true" />
+                <element signature="e#1981#1982#0" expanded="true" />
+                <element signature="e#2491#2492#0" expanded="true" />
+                <element signature="e#2554#2555#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,10 +105,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Memory.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5036765">
+            <state vertical-scroll-proportion="0.0">
               <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -147,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/ppc/Variable.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/ppc/PPC.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Program.java" />
         <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/CTRL.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/MemoryVariable.java" />
@@ -159,6 +167,7 @@
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Utils.java" />
         <option value="$PROJECT_DIR$/ppc/src/com/marasm/ppc/Variable.java" />
         <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java" />
+        <option value="$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java" />
       </list>
     </option>
   </component>
@@ -725,7 +734,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#1981#1982#0" expanded="true" />
+            <element signature="e#2491#2492#0" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -801,7 +817,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="116" column="23" selection-start-line="116" selection-start-column="23" selection-end-line="116" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#1981#1982#0" expanded="true" />
+            <element signature="e#2491#2492#0" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -875,7 +898,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="128" column="31" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
-          <folding />
+          <folding>
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#1981#1982#0" expanded="true" />
+            <element signature="e#2491#2492#0" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -991,14 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="167" column="0" selection-start-line="167" selection-start-column="0" selection-end-line="167" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Command.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1063,12 +1085,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/Memory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5036765">
+        <state vertical-scroll-proportion="0.0">
           <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1052#1053#0" expanded="true" />
             <element signature="e#1088#1089#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/marasm/mvm/main/CPU.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7794118">
+          <caret line="129" column="9" selection-start-line="129" selection-start-column="9" selection-end-line="129" selection-end-column="9" />
+          <folding>
+            <element signature="e#1605#1606#0" expanded="true" />
+            <element signature="e#1646#1647#0" expanded="true" />
+            <element signature="e#1931#1932#0" expanded="true" />
+            <element signature="e#1981#1982#0" expanded="true" />
+            <element signature="e#2491#2492#0" expanded="true" />
+            <element signature="e#2554#2555#0" expanded="true" />
           </folding>
         </state>
       </provider>

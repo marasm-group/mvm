@@ -112,7 +112,23 @@ public class CPU
         System.exit(mem.getValue(v).intValue());
     }
     void trace(){if(debug){Log.trace(Trace());}}
-    void log(String v){if(debug){Log.info(v + "=" + mem.getValue(v));}}
+    void log(String v)
+    {
+        if(debug)
+        {
+            Log.info(v);
+        }
+    }
+    void print(String[] v)
+    {
+        if(debug)
+        {
+            for(String str : v)
+            {
+                Log.info(str+"="+mem.getValue(str));
+            }
+        }
+    }
     String Trace()
     {   //TODO full trace
         String res=new String();
@@ -222,7 +238,10 @@ public class CPU
                     halt(cmd.args[0]);
                     break;
                 case "log":
-                    log(cmd.args[0]);
+                    log(String.join(" ", cmd.args));
+                    break;
+                case "print":
+                    print(cmd.args);
                     break;
                 case "trace":
                     trace();

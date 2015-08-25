@@ -85,8 +85,9 @@
 ;;  sleep <v> ;; sleep <v> milliseconds ;; <v> may be a numeric constant
 ;;  halt <v>  ;; abort execution with code <v> ;; <v> may be a numeric constant
 ;;
-;;  trace    ;; print current state (debug only)
-;;  log <v>  ;; print variable <v> value in format nameof(<v>)=valueof(<v>) (debug only)
+;;  trace     ;; print current state (debug only)
+;;  log <message> ;; print message
+;;  print <v> ;; print variable <v> value in format nameof(<v>)=valueof(<v>) (debug only)
 ;;  ;;
 ;;  ;; example:
 ;;  ;;
