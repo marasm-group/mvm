@@ -13,9 +13,9 @@ import java.util.Stack;
  */
 public class Memory
 {
-    Map<String,MemoryVariable> vars;//local MemoryVariables
-    Map<String,MemoryVariable> gvars;//global MemoryVariables
-    Stack<Map<String,MemoryVariable>>varsStack;
+    Map<String,Variable> vars;//local Variables
+    Map<String,Variable> gvars;//global Variables
+    Stack<Map<String,Variable>>varsStack;
 
     public Memory()
     {
@@ -27,10 +27,10 @@ public class Memory
     {
         String res=new String();
         res+="Local:\n";
-        for (Map.Entry<String, MemoryVariable> mv : vars.entrySet())
+        for (Map.Entry<String, Variable> mv : vars.entrySet())
             res+="\t"+mv.getKey()+"="+mv.getValue().toString()+"\n";
         res+="Global:\n";
-        for (Map.Entry<String, MemoryVariable> mv : gvars.entrySet())
+        for (Map.Entry<String, Variable> mv : gvars.entrySet())
             res+="\t"+mv.getKey()+"="+mv.getValue().toString()+"\n";
         return res;
     }
@@ -65,74 +65,70 @@ public class Memory
     public void Allocate(String varname)
     {
         if(vars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
-        int idx=varname.indexOf("[");
-        if(idx==-1){vars.put(varname,new MemoryVariable());return;}
-        int as=ArraySize(varname);
-        if(as==0){Log.error("Array size cannot be 0");}
-        varname=varname.substring(0,idx);
-        vars.put(varname,new MemoryVariable(as));
+        Allocate(varname,vars);
     }
     public void gAllocate(String varname){
         if(vars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
         if(gvars.get(varname)!=null){Log.error("Variable'" + varname + "' already exists!");return;}
+        Allocate(varname, gvars);
+
+    }
+    private void Allocate(String varname,Map<String,Variable>container)
+    {
         int idx=varname.indexOf("[");
-        if(idx==-1){gvars.put(varname,new MemoryVariable());return;}
+        if(idx==-1){container.put(varname,new Variable());return;}
         int as=ArraySize(varname);
         if(as==0){Log.error("Array size cannot be 0");}
         varname=varname.substring(0,idx);
-        gvars.put(varname,new MemoryVariable(as));
-    }
-    private void Allocate(String varname,Map<String,MemoryVariable>container)
-    {
-
+        for(int i=0;i<as;i++)
+        {
+            container.put(varname+"["+i+"]",new Variable());
+        }
     }
     public void Deallocate(String varname){Deallocate(varname, vars);}
     public void gDeallocate(String varname){Deallocate(varname, gvars);}
-    private void Deallocate(String varname,Map<String,MemoryVariable>container)
+    private void Deallocate(String varname,Map<String,Variable>container)
     {
-        if(container.get(varname)==null){Log.error("Variable'"+varname+"' does not exist!");return;}
+        if(container.get(varname)==null){
+            if(container.get(varname+"["+0+"]")==null)
+            {
+                Log.error("Variable'"+varname+"' does not exist!");return;
+            }
+            int i=0;
+            while (true)
+            {
+                String tmp=varname+"["+i+"]";
+                if(container.get(tmp)==null){return;}
+                container.remove(tmp);
+                i++;
+            }
+        }
         container.remove(varname);
     }
     public Variable Get(String varname)
     {
-        int idx=varname.indexOf("[");
-        if(idx==-1){
-            MemoryVariable v=vars.get(varname);
-            if(v!=null){return v.get();}
-            v=gvars.get(varname);
-            if(v!=null){return v.get();}
-            Log.error("Variable'" + varname + "' does not exist!");
-            idx=0;
-        }
-        int as=ArraySize(varname);
-        String oldVarName=varname;
-        varname=varname.substring(0,idx);
-        MemoryVariable v=vars.get(varname);
-        if(v!=null){return v.get(as);}
+        Variable v=vars.get(varname);
+        if(v!=null){return v;}
         v=gvars.get(varname);
-        if(v!=null){return v.get(as);}
-        Log.error("Variable'" + oldVarName + "' does not exist!");
+        if(v!=null){return v;}
+        Log.error("Variable'" + varname + "' does not exist!");
         return null;
     }
     public void Set(String varname,Variable val)
     {
-        int idx=varname.indexOf("[");
-        int as=0;
-        String oldVarName=varname;
-        if(idx!=-1){as=ArraySize(varname);varname=varname.substring(0,idx);}
-        MemoryVariable v=vars.get(varname);
+        Variable v=vars.get(varname);
         if(v!=null)
         {
-            v.set(val,as);
+            v.set(val);
             return;
         }
         v=gvars.get(varname);
         if(v!=null)
         {
-            v.set(val, as);
+            v.set(val);
             return;
         }
-        Log.error("Variable '"+oldVarName+"' does not exist!");
+        Log.error("Variable '"+varname+"' does not exist!");
         return;
     }
     public Variable getValue(String str)

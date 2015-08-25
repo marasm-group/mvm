@@ -32,6 +32,10 @@ public class Variable
     public long longValue(){return value.longValue();}
     public float floatValue(){return value.floatValue();}
     public double doubleValue(){return value.doubleValue();}
+    public void set(Variable v)
+    {
+        value=v.value;
+    }
     public Variable add(Variable v)
     {
         try{return  new Variable(value.add(v.value));}
