@@ -15,10 +15,10 @@ public class InterruptsController
     public static final Variable int_Arithmetic = new Variable(0);
 
     public static void Interrupt(Variable _int)
-    {
+    {synchronized (intQ){
         if(handlers.get(_int.toString())==null){return;}
         intQ.add(_int);
-    }
+    }}
     public static void SetInterruptHandler(Variable _int,String handler)
     {
         if(handlers.get(_int.toString())!=null){Log.warning("Replacing handler for interrupt "+_int);}
@@ -39,6 +39,12 @@ public class InterruptsController
     //public static Variable pop(Variable v){return params.pop();}
     //public static Stack<Variable> getParams(){return params;}
     //public static void emptyParams(){params=new Stack<>();}
+    public static Queue<Variable> pollIntQ()
+    {synchronized (intQ){
+        Queue<Variable>tmp=getIntQ();
+        emptyIntQ();
+        return tmp;
+    }}
     public static Queue<Variable> getIntQ(){return intQ;}
     public static void emptyIntQ(){intQ=new LinkedList<>();}
 }

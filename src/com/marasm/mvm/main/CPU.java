@@ -265,7 +265,7 @@ public class CPU
     }
     void processInterrupts()
     {
-        intQ.addAll(InterruptsController.getIntQ());
+        intQ.addAll(InterruptsController.pollIntQ());
         if(intQ.size()==0){return;}
         if(interruptCalls>0){return;}
         Variable v=intQ.poll();
