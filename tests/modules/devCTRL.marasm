@@ -1,0 +1,16 @@
+;;
+;; devCTRL ; MVM_CTRL device control protocol constants
+;;
+#json
+{
+    "author":"SR3u",
+    "dependencies":[],
+    "init":"$devCTRL_init"
+}
+#end
+$devCTRL_init
+gvar devCTRL_NOP     ; no operation
+gvar devCTRL_GETMAN  ; get manufacturer name
+mov devCTRL_NOP 0
+mov devCTRL_GETMAN 1
+ret

@@ -8,6 +8,8 @@ import java.nio.file.Paths;
  */
 public class Utils
 {
+    private static String mvm_home;
+    public static void setMarasmHome(String newHome){mvm_home=newHome;}
     public static String mainJarLocation()
     {
         return new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsoluteFile().getParent();
@@ -19,7 +21,8 @@ public class Utils
     public static String homeDir(){return System.getProperty("user.home")+File.separator;}
     public static String marasmHome()
     {
-        return mainJarLocation();
+        if(mvm_home==null){return mainJarLocation();}
+        return mvm_home;
     }
     public static String marasmModules()
     {

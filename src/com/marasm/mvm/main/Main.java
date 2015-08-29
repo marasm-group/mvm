@@ -16,6 +16,7 @@ public class Main implements ErrorHandler {
         options.addOption("e",true,"marASM executable file");
         options.addOption("h",false,"print help");
         options.addOption("D",false,"enable debug instructions");
+        options.addOption("mvmHome",true,"set custom mvm home directory");
         options.addOption("debugPort",true,"port to listen for remote debugger");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
@@ -31,6 +32,10 @@ public class Main implements ErrorHandler {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("mvm", options);
             System.exit(0);
+        }
+        if(cmd.hasOption("mvmHome"))
+        {
+            Utils.setMarasmHome(cmd.getOptionValue("mvmHome"));
         }
         instance=new Main();
 

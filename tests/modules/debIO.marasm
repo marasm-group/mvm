@@ -1,0 +1,61 @@
+;;
+;; debIO -- debug input/output device module
+;;
+#json
+{
+    "author":"SR3u",
+    "dependencies":["devCTRL"],
+    "init":"$debIO_init",
+    "devices":["debIO"]
+}
+#end
+$debIO_init           ;; initialize debIO module
+gvar debIO_controlPort    ;; control port for debIO device
+gvar debIO_dataPort       ;; port for numeric data output
+gvar debIO_charPort       ;; port for character output
+mov debIO_controlPort 63  ;;
+mov debIO_dataPort 64     ;;
+mov debIO_charPort 65     ;;
+ret
+
+$debIO_printStackStr  ;; prints a null ('\0') terminated string, passed through stack
+var chr
+@debIO_printStackStr_loop_0
+pop chr
+out debIO_charPort chr
+jnz chr @debIO_printStackStr_loop_0
+ret
+
+$debIO_printStackNum  ;; prints a number passed through stack
+var n
+pop n
+out debIO_dataPort n
+ret
+
+$debIO_readStackStr  ;; prints a null ('\0') terminated string, passed through stack
+var chr
+@debIO_readStackStr_loop_0
+in chr debIO_charPort
+push chr
+jnz chr @debIO_readStackStr_loop_0
+ret
+
+$debIO_readStackNum  ;; prints a number passed through stack
+var n
+in n debIO_dataPort
+push n
+ret
+
+$debIO_readManufacturer  ;; gets manufacturer name and its length through stack
+out debIO_controlPort devCTRL_GETMAN
+var chr
+var i
+mov i 0
+@debIO_readManufacturer_loop_0
+in chr debIO_controlPort
+push chr
+add i i 1
+jnz chr @debIO_readManufacturer_loop_0
+sub i i 1
+push i
+ret
