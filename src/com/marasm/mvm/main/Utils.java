@@ -9,7 +9,11 @@ import java.nio.file.Paths;
 public class Utils
 {
     private static String mvm_home;
-    public static void setMarasmHome(String newHome){mvm_home=newHome;}
+    public static void setMarasmHome(String newHome)
+    {
+        File f=new File(newHome);
+        mvm_home=f.getAbsolutePath();
+    }
     public static String mainJarLocation()
     {
         return new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsoluteFile().getParent();

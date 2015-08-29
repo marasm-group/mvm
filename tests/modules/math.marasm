@@ -1,9 +1,0 @@
-;;
-;; math -- mathematic functions and constants module
-;;
-#json
-{
-"author":"SR3u",
-"dependencies":["math/main"],
-}
-#end
