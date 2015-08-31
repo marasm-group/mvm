@@ -144,6 +144,7 @@ public class CPU
         res+="File: "+program.getFileName(programcounter)+"\n";
         res+="Line: "+(program.getLineInFile(programcounter)+1)+"\n";
         res+="Call stack: size="+callStack.size()+"\n";
+        res+="stack: "+stack.toString()+"\n";
         for(Long pc : callStack)
         {
             Command cmd=program.getCommand(pc);
