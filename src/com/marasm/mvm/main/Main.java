@@ -49,9 +49,14 @@ public class Main implements ErrorHandler {
             execute(cmd.getOptionValue("e"));
         }
         else {
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp( "mvm", options );
-            System.exit(0);
+            if(cmd.getArgList().size()==0) {
+                HelpFormatter formatter = new HelpFormatter();
+                formatter.printHelp("mvm", options);
+                System.exit(0);
+            }
+            else {
+                execute(cmd.getArgs()[0]);
+            }
         }
 
     }
