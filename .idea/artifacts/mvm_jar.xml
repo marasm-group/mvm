@@ -4,8 +4,10 @@
     <root id="archive" name="mvm.jar">
       <element id="module-output" name="mvm" />
       <element id="module-output" name="ppc" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20141113/json-20141113.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/commons-cli/commons-cli/1.3.1/commons-cli-1.3.1.jar" path-in-jar="/" />
+      <element id="library" level="project" name="org.json:json:20141113" />
+      <element id="library" level="project" name="commons-cli:commons-cli:1.3.1" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json-20141113.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-cli-1.3.1.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

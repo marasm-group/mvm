@@ -150,6 +150,8 @@ public class CPU
             if(cmd.args.length>0)
                 res+=cmd.args[0]+"\n";
         }res+="\n";
+        res+="tags: "+program.tags.toString()+"\n";
+        res+="functions: "+program.functions.toString()+"\n";
         res+="Variables:\n"+mem.toString()+"\n";
         res+="Modules loaded: "+program.filesLoaded.toString();
         return res;

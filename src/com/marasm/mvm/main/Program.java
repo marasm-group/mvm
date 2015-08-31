@@ -178,7 +178,7 @@ public class Program
         Long t=tags.get(tag);
         if(t==null)
         {
-            Log.error("function '"+tag+"' is not loaded");
+            Log.error("tag '"+tag+"' is not loaded");
             return 0;
         }
         return t.longValue();

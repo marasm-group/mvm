@@ -84,8 +84,10 @@ public class Main implements ErrorHandler {
 
     public void error()
     {
-        if(cpu!=null){Log.info(cpu.Trace());cpu.halt("-1");System.exit(-1);}
-        else{System.exit(-1);}
+        if(cpu!=null){Log.info(cpu.Trace());cpu.halt("-1");}
+        System.out.println("press return key to exit or just kill this process");
+        try {System.in.read();}
+        catch (IOException e) {e.printStackTrace();}
     }
     public void warning(){}
     Main(){}
