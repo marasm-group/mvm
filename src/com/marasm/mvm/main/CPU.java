@@ -268,9 +268,7 @@ public class CPU
                 case "print":
                     print(cmd.args);
                     break;
-                case "trace":System.out.println(RAM.load(new Variable("10")));
-                    RAM.store(new Variable(10), new Variable("777.777"));
-                    System.out.println(RAM.load(new Variable("10")));
+                case "trace":
                     trace();
                     break;
                 default:

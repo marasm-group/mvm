@@ -1,101 +1,12 @@
 ;;
-;; SIN in marasm
+;; Test sample
 ;;
 #json
 {
-    "author":"SR3u",
-    "dependencies":["debIO","math"],    
+    "author":"SR3u",    
+    "dependencies":[],
     "init":""
 }
 #end
-@sico_loop
-call $sico
-jmp @sico_loop
-halt 0 ; stop execution
-$sico
-push 0   ; pushing "Input angle (in degrees):"
-push ':'
-push ')' 
-push 's'
-push 'e'
-push 'e'
-push 'r'
-push 'g'
-push 'e'
-push 'd'
-push ' '
-push 'n'
-push 'i'
-push '('
-push ' '
-push 'e'
-push 'l'
-push 'g'
-push 'n'
-push 'a'
-push ' '
-push 't'
-push 'u'
-push 'p'
-push 'n'
-push 'I'
-call $debIO_printStackStr ; and print it
-push 0    ; print space
-push ' '
-call $debIO_printStackStr 
-call $debIO_readStackNum  ; read angle (in degrees)
-call $math_sinr_bound     ; bound it to 0..360 degrees
-var x      ; store angle here
-pop x
-push 0   ; push "angle (in degrees):"
-push ' ' 
-push ':' 
-push ')' 
-push 's'
-push 'e'
-push 'e'
-push 'r'
-push 'g'
-push 'e'
-push 'd'
-push ' '
-push 'n'
-push 'i'
-push '('
-push ' ' 
-push 'e'
-push 'l'
-push 'g'
-push 'n'
-push 'a'
-call $debIO_printStackStr ; and print it
-push x
-call $debIO_printStackNum ; read angle (in degrees)
-push 0    ; print space
-push '\n'
-call $debIO_printStackStr 
-push x
-call $sin  ; calculate sin
-push 0  ; pushing "sin: "
-push ' '
-push ':'
-push 'n'
-push 'i'
-push 's'
-call $debIO_printStackStr ; and print it
-call $debIO_printStackNum  ; print it
-push x
-call $cos  ; calculate cos
-push 0  ; pushing "cos: "
-push ' '
-push ':'
-push 's'
-push 'o'
-push 'c'
-push '\n'
-call $debIO_printStackStr ; and print it
-call $debIO_printStackNum  ; print it
-push 0
-push '\n'
-call $debIO_printStackStr ; print '\n'
-ret
+trace
+halt 0
