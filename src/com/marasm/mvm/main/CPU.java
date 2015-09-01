@@ -119,6 +119,14 @@ public class CPU
         halted=true;
         //System.exit(mem.getValue(v).intValue());
     }
+    void load(String v,String addr)
+    {
+        mem.Set(v,RAM.load(mem.getValue(addr)));
+    }
+    void store(String addr,String v)
+    {
+        RAM.store(mem.getValue(addr),mem.getValue(v));
+    }
     void trace(){if(debug){Log.trace(Trace());}}
     void log(String v)
     {
@@ -138,7 +146,7 @@ public class CPU
         }
     }
     String Trace()
-    {   //TODO full trace
+    {
         String res=new String();
         res+="CMD: "+program.getCommand(programcounter)+"\n";
         res+="File: "+program.getFileName(programcounter)+"\n";
@@ -154,6 +162,7 @@ public class CPU
         }res+="\n";
         res+="Variables:\n"+mem.toString()+"\n";
         res+="Modules loaded: "+program.filesLoaded.toString();
+        res+=RAM.string();
         return res;
     }
     void exec(Command cmd)
@@ -247,13 +256,21 @@ public class CPU
                 case "halt":
                     halt(cmd.args[0]);
                     break;
+                case "load":
+                    load(cmd.args[0], cmd.args[1]);
+                    break;
+                case "store":
+                    store(cmd.args[0], cmd.args[1]);
+                    break;
                 case "log":
                     log(String.join(" ", cmd.args));
                     break;
                 case "print":
                     print(cmd.args);
                     break;
-                case "trace":
+                case "trace":System.out.println(RAM.load(new Variable("10")));
+                    RAM.store(new Variable(10), new Variable("777.777"));
+                    System.out.println(RAM.load(new Variable("10")));
                     trace();
                     break;
                 default:

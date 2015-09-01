@@ -85,6 +85,9 @@
 ;;  sleep <v> ;; sleep <v> milliseconds ;; <v> may be a numeric constant
 ;;  halt <v>  ;; abort execution with code <v> ;; <v> may be a numeric constant
 ;;
+;;  load  <v> <addr>  ;; load value from address <addr> to variable <v> ;; <v> must be variable, <addr> may be numeric constant
+;;  store <addr> <v>  ;; load value <v> at address <addr> ;; <v> and <addr> may be numeric constants
+;;
 ;;  trace     ;; print current state (debug only)
 ;;  log <message> ;; print message
 ;;  print <v> ;; print variable <v> value in format nameof(<v>)=valueof(<v>) (debug only)

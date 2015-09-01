@@ -1,8 +1,6 @@
 package com.marasm.mvm.main;
 
-import com.marasm.ppc.ErrorHandler;
-import com.marasm.ppc.Log;
-import com.marasm.ppc.PPC;
+import com.marasm.ppc.*;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
