@@ -161,7 +161,7 @@ public class CPU
                 res+=cmd.args[0]+"\n";
         }res+="\n";
         res+="Variables:\n"+mem.toString()+"\n";
-        res+="Modules loaded: "+program.filesLoaded.toString();
+        res+="Modules loaded: "+program.filesLoaded.toString()+"\n";
         res+=RAM.string();
         return res;
     }
