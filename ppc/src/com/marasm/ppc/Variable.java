@@ -10,7 +10,7 @@ public class Variable
 {
     BigDecimal value;
     public Variable(){this(new BigDecimal(0));}
-    public Variable(BigDecimal val){value=val;}
+    public Variable(BigDecimal val){value=new BigDecimal(val.toString());}
     public Variable(Variable var){this(var.value);}
     public Variable(String str)
     {
@@ -34,7 +34,7 @@ public class Variable
     public double doubleValue(){return value.doubleValue();}
     public void set(Variable v)
     {
-        value=v.value;
+        value=new BigDecimal(v.value.toString());
     }
     public Variable add(Variable v)
     {
