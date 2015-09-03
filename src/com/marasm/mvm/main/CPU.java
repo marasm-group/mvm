@@ -154,12 +154,15 @@ public class CPU
         res+="Tags: "+program.tags.toString()+"\n";
         res+="Functions: "+program.functions.toString()+"\n";
         res+="Call stack: size="+callStack.size()+"\n";
+        res+="stack: "+stack.toString()+"\n";
         for(Long pc : callStack)
         {
             Command cmd=program.getCommand(pc);
             if(cmd.args.length>0)
                 res+=cmd.args[0]+"\n";
         }res+="\n";
+        res+="tags: "+program.tags.toString()+"\n";
+        res+="functions: "+program.functions.toString()+"\n";
         res+="Variables:\n"+mem.toString()+"\n";
         res+="Modules loaded: "+program.filesLoaded.toString()+"\n";
         res+=RAM.string();
