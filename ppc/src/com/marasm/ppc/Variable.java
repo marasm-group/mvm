@@ -62,7 +62,7 @@ public class Variable
     }
     public Variable div(Variable v)
     {
-        try{return  new Variable(value.divide(v.value,32,RoundingMode.HALF_UP));}
+        try{return  new Variable(value.divide(v.value, 32, RoundingMode.HALF_UP));}
         catch (ArithmeticException e){
             InterruptsController.Interrupt(InterruptsController.int_Arithmetic);
             return new Variable();
@@ -76,6 +76,7 @@ public class Variable
     {
         return new Variable(value.setScale(0,BigDecimal.ROUND_CEILING));
     }
+    public boolean equals(Variable v) {return isEqual(v);}
     public boolean isEqual(Variable v) {return  value.compareTo(v.value)==0;}
     public boolean isBigger(Variable v){return  value.compareTo(v.value)>0;}
     public boolean isSmaller(Variable v) {return value.compareTo(v.value) < 0;}
