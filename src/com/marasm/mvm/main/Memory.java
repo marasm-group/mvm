@@ -16,12 +16,14 @@ public class Memory
     Map<String,Variable> vars;//local Variables
     Map<String,Variable> gvars;//global Variables
     Stack<Map<String,Variable>>varsStack;
+    Program program;
 
-    public Memory()
+    public Memory(Program p)
     {
         vars=new HashMap<>();
         gvars=new HashMap<>();
         varsStack=new Stack<>();
+        program=p;
     }
     public String toString()
     {
@@ -84,8 +86,10 @@ public class Memory
     }
     private void Allocate(String varname,Map<String,Variable>container)
     {
+        if(varname.startsWith("$")||varname.startsWith("@"))
+        {Log.error("Variable name cannot start with $ or @");return;}
         int idx=varname.indexOf("[");
-        if(idx==-1){container.put(varname,new Variable());return;}
+        if(idx==-1){container.put(varname, new Variable());return;}
         int as=ArraySize(varname);
         if(as==0){Log.error("Array size cannot be 0");}
         varname=varname.substring(0,idx);
@@ -142,6 +146,8 @@ public class Memory
     }
     public Variable getValue(String str)
     {
+        if(str.startsWith("$")) {return new Variable(program.getFun(str));}
+        if (str.startsWith("@")){return new Variable(program.getTag(str));}
         try
         {
             BigDecimal bd=new BigDecimal(str);

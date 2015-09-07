@@ -19,11 +19,11 @@ public class Variable
         catch (NumberFormatException e){value=new BigDecimal(0);return;}
         value=v;
     }
-
     public Variable(int i) {this(new BigDecimal(i));}
     public Variable(long i) {this(new BigDecimal(i));}
     public Variable(float i) {this(new BigDecimal(i));}
     public Variable(double i) {this(new BigDecimal(i));}
+
     public String toString()
     {
         return value.toString();

@@ -3,10 +3,28 @@
 ;;
 #json
 {
-    "author":"SR3u",    
-    "dependencies":[],
+    "author":"SR3u",
+    "dependencies":["debIO"],
     "init":""
 }
 #end
-trace
+var f
+var t
+@loop
+mov t @loop
+mov f $fun
+call f
+jmp t
+halt 0
+$fun
+push 0  ; pushing "Hello!\n"
+push '\n'
+push '!'
+push 'o'
+push 'l'
+push 'l'
+push 'e'
+push 'H'
+call $debIO_printStackStr ; and print it
+ret
 halt 0

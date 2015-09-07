@@ -23,7 +23,7 @@ public class CPU
     public CPU(Program p)
     {
         programcounter=0;
-        mem= new Memory();
+        mem= new Memory(p);
         program=p;
         stack=new Stack<>();
         callStack=new Stack<>();
@@ -59,7 +59,7 @@ public class CPU
     }
     void floor(String res,String v)
     {
-        mem.Set(res,mem.getValue(v).floor());
+        mem.Set(res, mem.getValue(v).floor());
     }
     void ceil(String res,String v)
     {
@@ -75,9 +75,10 @@ public class CPU
     }
     void call(String fun)
     {
-        mem.push();
         callStack.push(programcounter);
-        programcounter=program.getFun(fun);
+        if(fun.startsWith("$")){programcounter=program.getFun(fun);}
+        else {programcounter=mem.getValue(fun).longValue();}
+        mem.push();
         if(interruptCalls>0){interruptCalls++;}
     }
     void ret()
@@ -89,7 +90,9 @@ public class CPU
     }
     void jmp(String tag)
     {
-        programcounter=program.getTag(tag);
+        if(tag.substring(0,1).equals("@")){
+        programcounter=program.getTag(tag);return;}
+        programcounter=mem.getValue(tag).longValue();
     }
     void jz(String v,String tag) {if(mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
     void jnz(String v,String tag){if(!mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
@@ -151,7 +154,7 @@ public class CPU
         res+="CMD: "+program.getCommand(programcounter)+"\n";
         res+="File: "+program.getFileName(programcounter)+"\n";
         res+="Line: "+(program.getLineInFile(programcounter)+1)+"\n";
-        res+="Tags: "+program.tags.toString()+"\n";
+        res+="Tags: " +program.tags.toString()+"\n";
         res+="Functions: "+program.functions.toString()+"\n";
         res+="Call stack: size="+callStack.size()+"\n";
         res+="stack: "+stack.toString()+"\n";
@@ -161,7 +164,7 @@ public class CPU
             if(cmd.args.length>0)
                 res+=cmd.args[0]+"\n";
         }res+="\n";
-        res+="tags: "+program.tags.toString()+"\n";
+        res+="tags: " +program.tags.toString()+"\n";
         res+="functions: "+program.functions.toString()+"\n";
         res+="Variables:\n"+mem.toString()+"\n";
         res+="Modules loaded: "+program.filesLoaded.toString()+"\n";
