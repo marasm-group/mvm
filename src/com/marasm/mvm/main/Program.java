@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,19 +62,24 @@ public class Program
     }
     public void loadModule(String name)
     {
+        boolean flag=true;
         if(!name.endsWith(".marasm"))
         {
             name=name+".marasm";
         }
-        if(name.startsWith("."))
+        if(name.startsWith("./"))
         {
-            name=Utils.workingDir()+name.substring(2);
+            File f=new File(name);
+            name=Utils.workingDir()+File.separator+f.getName();
+            flag=false;
         }
         if(name.startsWith("~"))
         {
-            name=Utils.homeDir()+name.substring(2);
+            File f=new File(name);
+            name=Utils.homeDir()+File.separator+f.getName();
+            flag=false;
         }
-        else
+        if(flag)
         {
             name=Utils.marasmModules()+name;
         }
