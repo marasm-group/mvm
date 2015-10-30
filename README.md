@@ -1,5 +1,5 @@
 # README #
-This is a [marASM](https://github.com/marasm-group/mvm/wiki/marASM-syntax) virtual machine
+This is a [marASM](https://github.com/marasm-group/mvm/wiki/marASM-syntax) virtual machine. For more info see [the wiki](https://github.com/marasm-group/mvm/wiki).
 
 ## Lisence ##
 
