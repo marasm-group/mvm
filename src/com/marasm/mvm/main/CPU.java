@@ -181,19 +181,19 @@ public class CPU
                 case "nop":
                     nop();
                     break;
-                case "mov":
+                case "="://mov
                     mov(cmd.args[0], cmd.args[1]);
                     break;
-                case "add":
+                case "+"://add
                     add(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
-                case "sub":
+                case "-"://sub
                     sub(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
-                case "mul":
+                case "*"://mul
                     mul(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
-                case "div":
+                case "/"://div
                     div(cmd.args[0], cmd.args[1], cmd.args[2]);
                     break;
                 case "floor":

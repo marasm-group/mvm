@@ -20,6 +20,7 @@ public class Command
         else{comment=new String();}
         String[] arr=str.split(" ");
         name=arr[0];
+        compress();
         args=new String[arr.length-1];
         for(int i=1;i<arr.length;i++)
         {
@@ -36,6 +37,14 @@ public class Command
             }
             args[i-1]=arr[i];
         }
+    }
+    private void compress()
+    {
+        name=name.replaceAll("mov","=");
+        name=name.replaceAll("add","+");
+        name=name.replaceAll("sub","-");
+        name=name.replaceAll("mul","*");
+        name=name.replaceAll("div","/");
     }
     public String toString()
     {
