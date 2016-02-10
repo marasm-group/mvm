@@ -136,6 +136,13 @@ public class Memory
     }
     public void Set(String varname,Variable val)
     {
+        int idx=varname.indexOf("[");
+        if(idx!=-1)
+        {
+            int arrIdx=ArraySize(varname);
+            varname=varname.substring(0,idx);
+            varname+="["+arrIdx+"]";
+        }
         Variable v=vars.get(varname);
         if(v!=null)
         {
