@@ -51,7 +51,7 @@ public class Memory
         if (idx== -1){return 0;}
         String ars="0";
         ars=varname.substring(idx);
-        idx = varname.lastIndexOf("]");
+        idx = ars.lastIndexOf("]");
         if (idx== -1){
             Log.error("No ']' found for '['");return 0;}
         ars=ars.substring(0,idx).trim();
@@ -120,6 +120,13 @@ public class Memory
     }
     public Variable Get(String varname)
     {
+        int idx=varname.indexOf("[");
+        if(idx!=-1)
+        {
+            int arrIdx=ArraySize(varname);
+            varname=varname.substring(0,idx);
+            varname+="["+arrIdx+"]";
+        }
         Variable v=vars.get(varname);
         if(v!=null){return new Variable(v);}
         v=gvars.get(varname);
