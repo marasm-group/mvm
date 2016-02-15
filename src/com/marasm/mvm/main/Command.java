@@ -40,11 +40,12 @@ public class Command
     }
     private void compress()
     {
-        name=name.replaceAll("mov","=");
-        name=name.replaceAll("add","+");
-        name=name.replaceAll("sub","-");
-        name=name.replaceAll("mul","*");
-        name=name.replaceAll("div","/");
+        if(name.startsWith("$")){return;}
+        name=name.replaceAll("\\bmov\\b","=");
+        name=name.replaceAll("\\badd\\b","+");
+        name=name.replaceAll("\\bsub\\b","-");
+        name=name.replaceAll("\\bmul\\b","*");
+        name=name.replaceAll("\\bdiv\\b","/");
     }
     public String toString()
     {
