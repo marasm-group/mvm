@@ -40,7 +40,7 @@ public class Command
     }
     private void compress()
     {
-        if(name.startsWith("$")){return;}
+        if(name.startsWith("$")||name.startsWith("@")){return;}
         name=name.replaceAll("\\bmov\\b","=");
         name=name.replaceAll("\\badd\\b","+");
         name=name.replaceAll("\\bsub\\b","-");
