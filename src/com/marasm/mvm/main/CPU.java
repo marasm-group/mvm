@@ -45,26 +45,52 @@ public class CPU
     {
         mem.Set(res,mem.getValue(v1).add(mem.getValue(v2)));
     }
+    void add()
+    {
+        Variable a=stack.pop();
+        Variable b=stack.pop();
+        stack.push(a.add(b));
+    }
     void sub(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).sub(mem.getValue(v2)));
+    }
+    void sub()
+    {
+        Variable a=stack.pop();
+        Variable b=stack.pop();
+        stack.push(a.sub(b));
     }
     void mul(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).mul(mem.getValue(v2)));
     }
+    void mul()
+    {
+        Variable a=stack.pop();
+        Variable b=stack.pop();
+        stack.push(a.mul(b));
+    }
     void div(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).div(mem.getValue(v2)));
+    }
+    void div()
+    {
+        Variable a=stack.pop();
+        Variable b=stack.pop();
+        stack.push(a.div(b));
     }
     void floor(String res,String v)
     {
         mem.Set(res, mem.getValue(v).floor());
     }
+    void floor(){stack.push(stack.pop().floor());}
     void ceil(String res,String v)
     {
         mem.Set(res, mem.getValue(v).ceil());
     }
+    void ceil(){stack.push(stack.pop().ceil());}
     void push(String v)
     {
         stack.push(mem.getValue(v));
@@ -185,22 +211,28 @@ public class CPU
                     mov(cmd.args[0], cmd.args[1]);
                     break;
                 case "+"://add
-                    add(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    if(cmd.args.length>0){add(cmd.args[0], cmd.args[1], cmd.args[2]);}
+                    else{add();}
                     break;
                 case "-"://sub
-                    sub(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    if(cmd.args.length>0){sub(cmd.args[0], cmd.args[1], cmd.args[2]);}
+                    else{sub();}
                     break;
                 case "*"://mul
-                    mul(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    if(cmd.args.length>0){mul(cmd.args[0], cmd.args[1], cmd.args[2]);}
+                    else{mul();}
                     break;
                 case "/"://div
-                    div(cmd.args[0], cmd.args[1], cmd.args[2]);
+                    if(cmd.args.length>0){div(cmd.args[0], cmd.args[1], cmd.args[2]);}
+                    else{div();}
                     break;
                 case "floor":
-                    floor(cmd.args[0], cmd.args[1]);
+                    if(cmd.args.length>0){floor(cmd.args[0], cmd.args[1]);}
+                    else{floor();}
                     break;
                 case "ceil":
-                    ceil(cmd.args[0], cmd.args[1]);
+                    if(cmd.args.length>0){ceil(cmd.args[0], cmd.args[1]);}
+                    else{ceil();}
                     break;
                 case "push":
                     push(cmd.args[0]);
