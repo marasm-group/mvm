@@ -47,8 +47,8 @@ public class CPU
     }
     void add()
     {
-        Variable a=stack.pop();
         Variable b=stack.pop();
+        Variable a=stack.pop();
         stack.push(a.add(b));
     }
     void sub(String res,String v1,String v2)
@@ -57,8 +57,8 @@ public class CPU
     }
     void sub()
     {
-        Variable a=stack.pop();
         Variable b=stack.pop();
+        Variable a=stack.pop();
         stack.push(a.sub(b));
     }
     void mul(String res,String v1,String v2)
@@ -67,8 +67,8 @@ public class CPU
     }
     void mul()
     {
-        Variable a=stack.pop();
         Variable b=stack.pop();
+        Variable a=stack.pop();
         stack.push(a.mul(b));
     }
     void div(String res,String v1,String v2)
@@ -77,8 +77,8 @@ public class CPU
     }
     void div()
     {
-        Variable a=stack.pop();
         Variable b=stack.pop();
+        Variable a=stack.pop();
         stack.push(a.div(b));
     }
     void floor(String res,String v)
