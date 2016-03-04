@@ -56,12 +56,18 @@
 ;;  nop ;; no operation (empty cmd)
 ;;  mov <res> <v> ;; <res> =  <v1>; ;;  <res> must be a variable, <v> may be a numeric constant
 ;;  add <res> <v1> <v2> ;;  <res> = <v1> + <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  add ;; adds two last elements of the statck and pushes the result
 ;;  sub <res> <v1> <v2> ;;  <res> = <v1> - <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  sub ;; substracts two last elements of the statck and pushes the result
 ;;  mul <res> <v1> <v2> ;;  <res> = <v1> * <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  mul ;; multiplies two last elements of the statck and pushes the result
 ;;  div <res> <v1> <v2> ;;  <res> = <v1> / <v2>; ;;  <res> must be a variable, <v1> and <v2> may be numeric constants
+;;  div ;; divides two last elements of the statck and pushes the result
 ;;  ;;
 ;;  floor <res> <v> ;;  <res> = floor(<v>); ;;  <res> must be a variable, <v> may be numeric constants
+;;  floor ;; same as above but uses stack
 ;;  ceil <res> <v>  ;;  <res> = ceiling(<v>); ;;  <res> must be a variable, <v> may be numeric constants
+;;  ceil ;; same as above but uses stack
 ;;  ;;
 ;;  push <v> ;; push <v> to stack ;; <v> may be a numeric constant
 ;;  pop <v>  ;; push <v> to stack ;; <v> must be a variable
