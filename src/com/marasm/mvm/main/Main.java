@@ -16,6 +16,7 @@ public class Main implements ErrorHandler {
         options.addOption("D",false,"enable debug instructions");
         options.addOption("mvmHome",true,"set custom mvm home directory");
         options.addOption("debugPort",true,"port to listen for remote debugger");
+        options.addOption("cppOut",true,"c++ output file (if this option si set, mvm will not execute program)");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -42,9 +43,18 @@ public class Main implements ErrorHandler {
         {
             debug=true;
         }
+        String cppout=null;
+        if(cmd.hasOption("cppOut"))
+        {
+            cppout=cmd.getOptionValue("cppOut");
+        }
+        if(cmd.hasOption("D"))
+        {
+            debug=true;
+        }
         if(cmd.hasOption("e"))
         {
-            execute(cmd.getOptionValue("e"));
+            execute(cmd.getOptionValue("e"),cppout);
         }
         else {
             if(cmd.getArgList().size()==0) {
@@ -53,12 +63,12 @@ public class Main implements ErrorHandler {
                 System.exit(0);
             }
             else {
-                execute(cmd.getArgs()[0]);
+                execute(cmd.getArgs()[0],cppout);
             }
         }
 
     }
-    static void execute(String path)
+    static void execute(String path,String cppOut)
     {
         Log.info("Working directory: " + Utils.workingDir());
         Log.info("User home directory: " + Utils.homeDir());
@@ -67,13 +77,21 @@ public class Main implements ErrorHandler {
         Log.info("Marasm devices: " + Utils.marasmDevices());
         PPC.LoadDevices(Utils.marasmDevices());
         Program p=new Program(path);
-        cpu=new CPU(p);
+        if(cppOut==null){cpu=new CPU(p);}
+        else{cpu=new CPUCPP(p,cppOut);}
         cpu.debug=debug;
         while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())
         {
             long oldPC=cpu.programcounter;
             cpu.exec(cpu.program.getCommand(cpu.programcounter));
             if(cpu.programcounter==oldPC){cpu.programcounter++;}
+        }
+        if(cppOut!=null)
+        {
+            cpu.end();
+            cpu.flush();
+            System.out.println("Compiled to "+cppOut);
+            System.exit(0);
         }
         System.out.println("press return key to exit or just kill this process");
         try {System.in.read();}

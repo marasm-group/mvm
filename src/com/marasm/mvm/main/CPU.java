@@ -331,4 +331,6 @@ public class CPU
             interruptCalls++;
         }
     }
+    void end(){}
+    void flush(){}
 }
