@@ -41,7 +41,7 @@ public class CPUCPP extends CPU
         try
         {
             BigDecimal bd=new BigDecimal(str);
-            return str;
+            return "Variable(\""+str+"\")";
         }
         catch (NumberFormatException e)
         {
@@ -195,7 +195,7 @@ public class CPUCPP extends CPU
         {
             v=mem.getValue(v).toString();
         }
-        else{v=varFormat(v);}
+        v=varFormat(v);
         write("push("+v+");");
     }
     void pop(String res)
@@ -475,9 +475,11 @@ public class CPUCPP extends CPU
             "        }\n" +
             "        buf<<fract;\n" +
             "    }\n" +
-            "    //sprintf(s, \"%d.%0*d\", (int)n2, precision, fract);\n" +
-            "    return buf.str();\n" +
-            "}\n" +
+            "    AutoString str=buf.str();\n" +
+            "    str.erase ( str.find_last_not_of('0') + 1, std::string::npos );\n" +
+            "    if(str.length()==0){str=\"0\";}\n" +
+            "    return str;\n" +
+            "}\n"+
             "double Decimal::toDouble(void) const\n" +
             "{\n" +
             "    return atof(toString().c_str());\n" +
@@ -583,7 +585,7 @@ public class CPUCPP extends CPU
             "}\n" +
             "void out_(const Variable&port,const Variable&d)\n" +
             "{\n" +
-            "    std::cout<<\"out not implemented\\n\";\n" +
+            "    std::cout<<\"out not implemented \";\n" +
             "    std::cout<<d.toString()<<\"->\"<<port.toString()<<'\\n';\n" +
             "}\n" +
             "void sleep(const Variable&v){usleep((int64_t)v.floor().toDouble());}\n" +
