@@ -3,7 +3,10 @@ package com.marasm.mvm.main;
 import com.marasm.ppc.*;
 import org.apache.commons.cli.*;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
 
 public class Main implements ErrorHandler {
     static CPU cpu;
@@ -17,6 +20,7 @@ public class Main implements ErrorHandler {
         options.addOption("mvmHome",true,"set custom mvm home directory");
         options.addOption("debugPort",true,"port to listen for remote debugger");
         options.addOption("cppOut",true,"c++ output file (if this option si set, mvm will not execute program)");
+        options.addOption("devicePort",true,"act like device server for other programs on selected port");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -52,6 +56,11 @@ public class Main implements ErrorHandler {
         {
             debug=true;
         }
+        if(cmd.hasOption("devicePort"))
+        {
+            deviceServer(cmd.getOptionValue("devicePort"));
+            System.exit(0);
+        }
         if(cmd.hasOption("e"))
         {
             execute(cmd.getOptionValue("e"),cppout);
@@ -68,7 +77,7 @@ public class Main implements ErrorHandler {
         }
 
     }
-    static void execute(String path,String cppOut)
+    static void prepare()
     {
         Log.info("Working directory: " + Utils.workingDir());
         Log.info("User home directory: " + Utils.homeDir());
@@ -76,6 +85,10 @@ public class Main implements ErrorHandler {
         Log.info("Marasm modules: " + Utils.marasmModules());
         Log.info("Marasm devices: " + Utils.marasmDevices());
         PPC.LoadDevices(Utils.marasmDevices());
+    }
+    static void execute(String path,String cppOut)
+    {
+        prepare();
         Program p=new Program(path);
         if(cppOut==null){cpu=new CPU(p);}
         else{cpu=new CPUCPP(p,cppOut);}
@@ -108,4 +121,58 @@ public class Main implements ErrorHandler {
     }
     public void warning(){}
     Main(){}
+    static void deviceServer(String port)
+    {
+        prepare();
+        ServerSocket serverSocket= null;
+        try {
+            serverSocket = new ServerSocket(Integer.parseInt(port));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while(true)
+        {
+            try
+            {
+                Socket server = serverSocket.accept();
+                /*new Thread()
+                {
+                    public void run()
+                    {
+                        try{*/
+                            BufferedReader in =new BufferedReader(new InputStreamReader(server.getInputStream()));
+                            BufferedWriter out=new BufferedWriter(new OutputStreamWriter(server.getOutputStream()));
+                            String cmd = in.readLine();
+                            String[] s = cmd.split("\\:");
+                            if (s.length == 0) {
+                                continue;
+                            }
+                            if (!s[0].contains(".")) {
+                                s[0] += ".0";
+                            }
+                            System.out.println(cmd);
+                            switch (s.length) {
+                                case 1:
+                                    Variable res = PPC.in(new Variable(s[0]));
+                                    out.write(res.toString());
+                                    break;
+                                case 2:
+                                    PPC.out(new Variable(s[0]), new Variable(s[1]));
+                                    out.write("OK\n");
+                                    break;
+                                default:
+                                    break;
+                            }
+                            server.close();
+                        /*}
+                        catch(Exception e){e.printStackTrace();}
+                    }
+                }.start();*/
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
 }
