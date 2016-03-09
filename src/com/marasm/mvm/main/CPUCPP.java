@@ -16,7 +16,6 @@ public class CPUCPP extends CPU
     String globalVariablesStr=cppHeader+"";
     ArrayList<String> variables=new ArrayList<>();
     ArrayList<String> gVariables=new ArrayList<>();
-    String initFunctions="";
     String code="int main()\n{\n";
     String funCode="";
     String variablesStr="";
@@ -239,10 +238,10 @@ public class CPUCPP extends CPU
     {
         write("store("+varFormat(addr)+","+varFormat(v)+");");
     }
-    void trace(){write("//trace");}
+    void trace(){write("trace();");}
     void log(String v)
     {
-        write("std::cout<<\""+v+"<<'\n';");
+        write("std::cout<<\""+v+"\"<<'\n';");
     }
     void print(String[] v)
     {
@@ -250,7 +249,7 @@ public class CPUCPP extends CPU
         {
             for(String str : v)
             {
-                write("std::cout<<\""+str+"<<\"=\"<<"+str+"'\n';");
+                write("std::cout<<\""+str+"<<\"=<<"+str+"'\n';");
             }
         }
     }
@@ -596,5 +595,6 @@ public class CPUCPP extends CPU
             "    std::cout<<\"halt with code: \"<<v.toString()<<\"\\n\";\n" +
             "    exit(toInteger(v));\n" +
             "}\n" +
+            "void trace(){std::cout<<\"trace is not available!\\n\";}\n" +
             "#endif /* MVMCPP */\n";
 }
