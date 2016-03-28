@@ -305,7 +305,9 @@ public class JavaCPU extends CPU {
 
     public void halt(String v) {
         write("cpu.halt(" + varFormat(v) + ");");
-        write("System.out.println(\"Halt with code \"+"+"cpu.mem.getValue("+varFormat(v)+"));");
+        write("System.out.println(\"press return key to exit or just kill this process\");");
+        write("try {System.in.read();}");
+        write("catch (IOException e) {e.printStackTrace();}");
         write("System.exit(cpu.mem.getValue("+varFormat(v)+").intValue());");
     }
 
@@ -345,7 +347,7 @@ public class JavaCPU extends CPU {
             "import com.marasm.mvm.main.*;\n" +
             "import com.marasm.ppc.*;\n" +
             "import org.apache.commons.cli.*;\n" +
-            "\n" +
+            "import java.io.IOException;\n" +
             "import java.util.Stack;\n" +
             "public class Main\n" +
             "{\n" +
