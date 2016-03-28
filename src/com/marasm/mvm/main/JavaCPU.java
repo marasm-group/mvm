@@ -305,6 +305,8 @@ public class JavaCPU extends CPU {
 
     public void halt(String v) {
         write("cpu.halt(" + varFormat(v) + ");");
+        write("System.out.println(\"Halt with code \"+"+"cpu.mem.getValue("+varFormat(v)+"));");
+        write("System.exit(cpu.mem.getValue("+varFormat(v)+").intValue());");
     }
 
     public void load(String v, String addr) {
