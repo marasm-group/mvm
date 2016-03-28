@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by vhq473 on 09.03.2016.
@@ -91,6 +92,7 @@ public class JavaCPU extends CPU {
 
     public void flush() {
         write(footer);
+        Collections.sort(symbols);
         for (String sym : symbols) {
             write(sym + ",");
         }
@@ -317,7 +319,6 @@ public class JavaCPU extends CPU {
             "{\n" +
             "Options options=new Options();\n" +
             "options.addOption(\"h\",false,\"print help\");\n" +
-            "options.addOption(\"D\",false,\"enable debug instructions\");\n" +
             "options.addOption(\"mvmHome\",true,\"set custom mvm home directory\");\n" +
             "CommandLineParser parser = new DefaultParser();\n" +
             "CommandLine cmd = null;\n" +
@@ -346,7 +347,7 @@ public class JavaCPU extends CPU {
             "{\n" +
             "switch (sym)\n" +
             "{\n" +
-            "case start:\n";
+            "case start:";
     static String footer = "" +
             "case  empty:\n" +
             "throw new Exception(\"'ret' without 'call' (empty callstack!)\");\n" +
@@ -357,5 +358,5 @@ public class JavaCPU extends CPU {
             "}\n" +
             "enum Symbol\n" +
             "{\n" +
-            " empty,start,\n";
+            " empty,start,";
 }
