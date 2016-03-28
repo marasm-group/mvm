@@ -17,7 +17,10 @@ public class JavaCPU extends CPU {
     static String retPrefix = "__ret_";
     static String illegalPrefix = "__illegal_";
     long initCount=0;
-    ArrayList<String> symbols;
+    ArrayList<String> tags;
+    ArrayList<String> functions;
+    ArrayList<String> returns;
+    ArrayList<String> illegals;
 
     public JavaCPU(Program p, String outputFile) {
         super(p);
@@ -26,7 +29,10 @@ public class JavaCPU extends CPU {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        symbols = new ArrayList<>();
+        tags = new ArrayList<>();
+        functions = new ArrayList<>();
+        returns = new ArrayList<>();
+        illegals = new ArrayList<>();
         initCount=0;
         write(header);
         for (String fun : program.initializationFunctions) {
@@ -50,7 +56,7 @@ public class JavaCPU extends CPU {
         if(prevBreak){
             String sym=illegalPrefix+programcounter;
             write("case "+sym+":");
-            symbols.add(sym);
+            addSymbol(sym);
         }
         if(str.startsWith("break;")){prevBreak=true;}
         if (file == null) {
@@ -64,7 +70,25 @@ public class JavaCPU extends CPU {
             }
         }
     }
-
+    void addSymbol(String sym)
+    {
+        if(sym.startsWith(funPrefix))
+        {
+            functions.add(sym);
+            return;
+        }
+        if(sym.startsWith(tagPrefix))
+        {
+            tags.add(sym);
+            return;
+        }
+        if(sym.startsWith(retPrefix))
+        {
+            returns.add(sym);
+            return;
+        }
+        illegals.add(sym);
+    }
     public void exec(Command cmd) {
         if (cmd.name.length() == 0) {
             return;
@@ -82,18 +106,30 @@ public class JavaCPU extends CPU {
         end();
         write("case " + symFormat(fun) + ":");
         write("cpu.mem.push();");
-        symbols.add(symFormat(fun));
+        addSymbol(symFormat(fun));
     }
 
     public void tag(String tag) {
         write("case " + symFormat(tag) + ":");
-        symbols.add(symFormat(tag));
+        addSymbol(symFormat(tag));
     }
 
     public void flush() {
         write(footer);
-        Collections.sort(symbols);
-        for (String sym : symbols) {
+        Collections.sort(tags);
+        Collections.sort(functions);
+        Collections.sort(returns);
+        Collections.sort(illegals);
+        for (String sym : tags) {
+            write(sym + ",");
+        }
+        for (String sym : functions) {
+            write(sym + ",");
+        }
+        for (String sym : returns) {
+            write(sym + ",");
+        }
+        for (String sym : illegals) {
             write(sym + ",");
         }
         write("}\n}");
@@ -188,12 +224,13 @@ public class JavaCPU extends CPU {
     }
 
     public void call(String fun) {
-        if (symbols == null) {
-            symbols = new ArrayList<>();
+        if (functions == null) {
+            functions = new ArrayList<>();
         }
         String retSymbol = retPrefix + this.programcounter;
         if(initCount>=0){retSymbol+="_init_"+initCount;}
-        symbols.add(retSymbol);
+        if(returns==null){returns=new ArrayList<>();}
+        addSymbol(retSymbol);
         write("callStack.push(Symbol." + retSymbol + ");");
         write("sym=Symbol." + symFormat(fun) + ";");
         write("break;");
