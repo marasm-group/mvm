@@ -6,7 +6,6 @@ import org.apache.commons.cli.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
 
 public class Main implements ErrorHandler {
     static CPU cpu;
@@ -19,7 +18,7 @@ public class Main implements ErrorHandler {
         options.addOption("D",false,"enable debug instructions");
         options.addOption("mvmHome",true,"set custom mvm home directory");
         options.addOption("debugPort",true,"port to listen for remote debugger");
-        options.addOption("cppOut",true,"c++ output file (if this option si set, mvm will not execute program)");
+        options.addOption("javaOut",true,"java output file (if this option si set, mvm will not execute program)");
         options.addOption("devicePort",true,"act like device server for other programs on selected port");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
@@ -47,10 +46,10 @@ public class Main implements ErrorHandler {
         {
             debug=true;
         }
-        String cppout=null;
-        if(cmd.hasOption("cppOut"))
+        String javaout=null;
+        if(cmd.hasOption("javaOut"))
         {
-            cppout=cmd.getOptionValue("cppOut");
+            javaout=cmd.getOptionValue("javaOut");
         }
         if(cmd.hasOption("D"))
         {
@@ -63,7 +62,7 @@ public class Main implements ErrorHandler {
         }
         if(cmd.hasOption("e"))
         {
-            execute(cmd.getOptionValue("e"),cppout);
+            execute(cmd.getOptionValue("e"),javaout);
         }
         else {
             if(cmd.getArgList().size()==0) {
@@ -72,26 +71,29 @@ public class Main implements ErrorHandler {
                 System.exit(0);
             }
             else {
-                execute(cmd.getArgs()[0],cppout);
+                execute(cmd.getArgs()[0],javaout);
             }
         }
 
     }
-    static void prepare()
+    public static void prepare(){prepare(true);}
+    public static void prepare(boolean loadDevices)
     {
         Log.info("Working directory: " + Utils.workingDir());
         Log.info("User home directory: " + Utils.homeDir());
         Log.info("Marasm home: " + Utils.marasmHome());
         Log.info("Marasm modules: " + Utils.marasmModules());
         Log.info("Marasm devices: " + Utils.marasmDevices());
-        PPC.LoadDevices(Utils.marasmDevices());
+        if(loadDevices) {
+            PPC.LoadDevices(Utils.marasmDevices());
+        }
     }
-    static void execute(String path,String cppOut)
+    static void execute(String path,String javaOut)
     {
-        prepare();
+        prepare(javaOut==null);
         Program p=new Program(path);
-        if(cppOut==null){cpu=new CPU(p);}
-        else{cpu=new CPUCPP(p,cppOut);}
+        if(javaOut==null){cpu=new CPU(p);}
+        else{cpu=new JavaCPU(p,javaOut);}
         cpu.debug=debug;
         while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())
         {
@@ -99,11 +101,11 @@ public class Main implements ErrorHandler {
             cpu.exec(cpu.program.getCommand(cpu.programcounter));
             if(cpu.programcounter==oldPC){cpu.programcounter++;}
         }
-        if(cppOut!=null)
+        if(javaOut!=null)
         {
             cpu.end();
             cpu.flush();
-            System.out.println("Compiled to "+cppOut);
+            System.out.println("Compiled to "+javaOut);
             System.exit(0);
         }
         System.out.println("press return key to exit or just kill this process");

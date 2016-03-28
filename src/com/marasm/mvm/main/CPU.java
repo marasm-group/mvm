@@ -11,7 +11,7 @@ import java.util.Stack;
  */
 public class CPU
 {
-    Memory mem;
+    public Memory mem;
     Stack<Variable> stack;
     Stack<Long> callStack;
     Program program;
@@ -32,74 +32,74 @@ public class CPU
     }
     public boolean isHalted(){return halted;}
 
-    void nop(){}
-    void var(String v){mem.Allocate(v);}
-    void gvar(String v){mem.gAllocate(v);}
-    void delv(String v){mem.Deallocate(v);}
-    void delg(String v){mem.gDeallocate(v);}
-    void mov(String res,String v)
+    public void nop(){}
+    public void var(String v){mem.Allocate(v);}
+    public void gvar(String v){mem.gAllocate(v);}
+    public void delv(String v){mem.Deallocate(v);}
+    public void delg(String v){mem.gDeallocate(v);}
+    public void mov(String res,String v)
     {
         mem.Set(res, mem.getValue(v));
     }
-    void add(String res,String v1,String v2)
+    public void add(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).add(mem.getValue(v2)));
     }
-    void add()
+    public void add()
     {
         Variable b=stack.pop();
         Variable a=stack.pop();
         stack.push(a.add(b));
     }
-    void sub(String res,String v1,String v2)
+    public void sub(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).sub(mem.getValue(v2)));
     }
-    void sub()
+    public void sub()
     {
         Variable b=stack.pop();
         Variable a=stack.pop();
         stack.push(a.sub(b));
     }
-    void mul(String res,String v1,String v2)
+    public void mul(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).mul(mem.getValue(v2)));
     }
-    void mul()
+    public void mul()
     {
         Variable b=stack.pop();
         Variable a=stack.pop();
         stack.push(a.mul(b));
     }
-    void div(String res,String v1,String v2)
+    public void div(String res,String v1,String v2)
     {
         mem.Set(res,mem.getValue(v1).div(mem.getValue(v2)));
     }
-    void div()
+    public void div()
     {
         Variable b=stack.pop();
         Variable a=stack.pop();
         stack.push(a.div(b));
     }
-    void floor(String res,String v)
+    public void floor(String res,String v)
     {
         mem.Set(res, mem.getValue(v).floor());
     }
-    void floor(){stack.push(stack.pop().floor());}
-    void ceil(String res,String v)
+    public void floor(){stack.push(stack.pop().floor());}
+    public void ceil(String res,String v)
     {
         mem.Set(res, mem.getValue(v).ceil());
     }
-    void ceil(){stack.push(stack.pop().ceil());}
-    void push(String v)
+    public void ceil(){stack.push(stack.pop().ceil());}
+    public void push(String v)
     {
         stack.push(mem.getValue(v));
     }
-    void pop(String res)
+    public void pop(String res)
     {
         mem.Set(res, stack.pop());
     }
-    void call(String fun)
+    public void call(String fun)
     {
         callStack.push(programcounter);
         if(fun.startsWith("$")){programcounter=program.getFun(fun);}
@@ -107,64 +107,64 @@ public class CPU
         mem.push();
         if(interruptCalls>0){interruptCalls++;}
     }
-    void ret()
+    public void ret()
     {
         mem.pop();
         programcounter=callStack.pop();
         programcounter++;
         if(interruptCalls>0){interruptCalls--;}
     }
-    void jmp(String tag)
+    public void jmp(String tag)
     {
         if(tag.substring(0,1).equals("@")){
         programcounter=program.getTag(tag);return;}
         programcounter=mem.getValue(tag).longValue();
     }
-    void jz(String v,String tag) {if(mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
-    void jnz(String v,String tag){if(!mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
-    void jmz(String v,String tag){if(mem.getValue(v).isBigger(new Variable(0))){jmp(tag);}}
-    void jlz(String v,String tag){if(mem.getValue(v).isSmaller(new Variable(0))){jmp(tag);}}
-    void in(String res,String port)
+    public void jz(String v,String tag) {if(mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
+    public void jnz(String v,String tag){if(!mem.getValue(v).isEqual(new Variable(0))){jmp(tag);}}
+    public void jmz(String v,String tag){if(mem.getValue(v).isBigger(new Variable(0))){jmp(tag);}}
+    public void jlz(String v,String tag){if(mem.getValue(v).isSmaller(new Variable(0))){jmp(tag);}}
+    public void in(String res,String port)
     {
         mem.Set(res, PPC.in(mem.getValue(port)));
     }
-    void out(String port,String data)
+    public void out(String port,String data)
     {
         PPC.out(mem.getValue(port), mem.getValue(data));
     }
-    void setint(String _int,String fun){InterruptsController.SetInterruptHandler(mem.getValue(_int), fun);}
-    void _int(String _int){InterruptsController.Interrupt(mem.getValue(_int));}
+    public void setint(String _int,String fun){InterruptsController.SetInterruptHandler(mem.getValue(_int), fun);}
+    public void _int(String _int){InterruptsController.Interrupt(mem.getValue(_int));}
 
-    void rmint(String _int){InterruptsController.RemoveInterruptHandler(mem.getValue(_int));}
-    void sleep(String v)
+    public void rmint(String _int){InterruptsController.RemoveInterruptHandler(mem.getValue(_int));}
+    public void sleep(String v)
     {//TODO make sleep work with interrupts
         Log.warning("sleep is not properly implemented yed");
         try {Thread.sleep(mem.getValue(v).longValue());}
         catch (InterruptedException e){}
     }
-    void halt(String v)
+    public void halt(String v)
     {
         Console.println("halt with code: " + mem.getValue(v));
         halted=true;
         //System.exit(mem.getValue(v).intValue());
     }
-    void load(String v,String addr)
+    public void load(String v,String addr)
     {
         mem.Set(v,RAM.load(mem.getValue(addr)));
     }
-    void store(String addr,String v)
+    public void store(String addr,String v)
     {
         RAM.store(mem.getValue(addr),mem.getValue(v));
     }
-    void trace(){if(debug){Log.trace(Trace());}}
-    void log(String v)
+    public void trace(){if(debug){Log.trace(Trace());}}
+    public void log(String v)
     {
         if(debug)
         {
             Log.info(v);
         }
     }
-    void print(String[] v)
+    public void print(String[] v)
     {
         if(debug)
         {
@@ -197,7 +197,7 @@ public class CPU
         res+=RAM.string();
         return res;
     }
-    void exec(Command cmd)
+    public void exec(Command cmd)
     {
         if(cmd.name.length()==0){return;}
         if(cmd.name.startsWith("$")){return;}
@@ -318,7 +318,7 @@ public class CPU
         }
         processInterrupts();
     }
-    void processInterrupts()
+    public void processInterrupts()
     {
         intQ.addAll(InterruptsController.pollIntQ());
         if(intQ.size()==0){return;}
@@ -331,6 +331,6 @@ public class CPU
             interruptCalls++;
         }
     }
-    void end(){}
-    void flush(){}
+    public void end(){}
+    public void flush(){}
 }
