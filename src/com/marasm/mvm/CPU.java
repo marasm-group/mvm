@@ -1,4 +1,4 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
 import com.marasm.ppc.*;
 
@@ -14,7 +14,7 @@ public class CPU
     public Memory mem;
     Stack<Variable> stack;
     Stack<Long> callStack;
-    Program program;
+    protected Program program;
     public long programcounter=0;
     public boolean debug=false;
     boolean halted=false;
@@ -132,7 +132,8 @@ public class CPU
     {
         PPC.out(mem.getValue(port), mem.getValue(data));
     }
-    public void setint(String _int,String fun){InterruptsController.SetInterruptHandler(mem.getValue(_int), fun);}
+    public void setint(String _int,String fun){
+        InterruptsController.SetInterruptHandler(mem.getValue(_int), fun);}
     public void _int(String _int){InterruptsController.Interrupt(mem.getValue(_int));}
 
     public void rmint(String _int){InterruptsController.RemoveInterruptHandler(mem.getValue(_int));}
@@ -150,7 +151,7 @@ public class CPU
     }
     public void load(String v,String addr)
     {
-        mem.Set(v,RAM.load(mem.getValue(addr)));
+        mem.Set(v, RAM.load(mem.getValue(addr)));
     }
     public void store(String addr,String v)
     {

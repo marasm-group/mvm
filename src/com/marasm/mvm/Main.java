@@ -1,6 +1,10 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
-import com.marasm.ppc.*;
+import com.marasm.mvm.codegen.JavaCPU;
+import com.marasm.ppc.ErrorHandler;
+import com.marasm.ppc.Log;
+import com.marasm.ppc.PPC;
+import com.marasm.ppc.Variable;
 import org.apache.commons.cli.*;
 
 import java.io.*;

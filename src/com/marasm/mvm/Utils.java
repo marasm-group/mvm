@@ -1,4 +1,4 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
 import java.io.File;
 import java.nio.file.Paths;

@@ -1,4 +1,4 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
 import com.marasm.ppc.Log;
 import org.json.JSONArray;
@@ -22,7 +22,7 @@ public class Program
     ArrayList<Command> program;
     Map<String,Long> functions,tags;
     Map<String,JSONObject> filesLoaded;
-    ArrayList<String> initializationFunctions;
+    public ArrayList<String> initializationFunctions;
 
     public Program()
     {

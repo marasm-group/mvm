@@ -1,4 +1,4 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
 import com.marasm.ppc.Log;
 import com.marasm.ppc.Variable;

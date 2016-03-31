@@ -1,4 +1,4 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm;
 
 /**
  * Created by sr3u on 19.08.15.

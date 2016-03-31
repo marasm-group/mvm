@@ -1,8 +1,11 @@
-package com.marasm.mvm.main;
+package com.marasm.mvm.codegen;
+
+import com.marasm.mvm.CPU;
+import com.marasm.mvm.Command;
+import com.marasm.mvm.Program;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -345,7 +348,7 @@ public class JavaCPU extends CPU {
     static String header = "" +
             "package com.marasm.mvmJava;\n" +
             "import com.marasm.mvm.main.*;\n" +
-            "import com.marasm.ppc.*;\n" +
+            "import ppc.*;\n" +
             "import org.apache.commons.cli.*;\n" +
             "import java.io.IOException;\n" +
             "import java.util.Stack;\n" +
@@ -354,7 +357,7 @@ public class JavaCPU extends CPU {
             "static CPU cpu=new CPU(new Program());\n" +
             "static void init()\n" +
             "{\n" +
-            "com.marasm.mvm.main.Main.prepare();\n" +
+            "com.marasm.mvm.Main.prepare();\n" +
             "}\n" +
             "public static void main(String[] args) throws Exception\n" +
             "{\n" +
