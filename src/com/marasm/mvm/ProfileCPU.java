@@ -42,18 +42,38 @@ public class ProfileCPU extends CPU
     Map<String,Long> portsIn;
     Map<String,Long> portsOut;
     Map<String,Double> avgFunTimes;
-    long varAllocations=0;
-    long gvarAllocations=0;
-    long varDeletions=0;
-    long gvarDeletions=0;
-    long maxStackSize=0;
-    long maxCallStack=0;
-    long debugInstructions=0;
-    long ramIOs=0;
-    long emptyCommands=0;
-    Variable haltCode=new Variable("0");
-
+    long varAllocations;
+    long gvarAllocations;
+    long varDeletions;
+    long gvarDeletions;
+    long maxStackSize;
+    long maxCallStack;
+    long debugInstructions;
+    long ramIOs;
+    long emptyCommands;
+    Variable haltCode;
     Stack<FunDuration> funDurationStack;
+    protected void init()
+    {
+        instrCounts=new HashMap<>();
+        funCallsCounts=new HashMap<>();
+        tagJmpCounts=new HashMap<>();
+        portsIn=new HashMap<>();
+        portsOut=new HashMap<>();
+        avgFunTimes=new HashMap<>();
+        funDurationStack=new Stack<>();
+        varAllocations=0;
+        gvarAllocations=0;
+        varDeletions=0;
+        gvarDeletions=0;
+        maxStackSize=0;
+        maxCallStack=0;
+        debugInstructions=0;
+        ramIOs=0;
+        emptyCommands=0;
+        haltCode=new Variable("0");
+    }
+
     void incrementCounter(Map<String,Long>m,String key)
     {
         Long l=m.get(key);
@@ -84,7 +104,6 @@ public class ProfileCPU extends CPU
         }
         if(cmd.name.startsWith("$")){return;}
         if(cmd.name.startsWith("@")){return;}
-        if(instrCounts==null){instrCounts=new HashMap<>();}
         incrementCounter(instrCounts,cmd.fullName);
     }
 
@@ -116,26 +135,20 @@ public class ProfileCPU extends CPU
     }
     public void call(String fun)
     {
-        maxCallStack= Math.max(maxCallStack,callStack.size());
-        if(funCallsCounts==null){funCallsCounts=new HashMap<>();}
+
         incrementCounter(funCallsCounts,fun);
-        if(funDurationStack==null)
-        {
-            funDurationStack=new Stack<>();
-        }
         funDurationStack.push(new FunDuration(fun));
         super.call(fun);
+        maxCallStack= Math.max(maxCallStack,callStack.size());
     }
     public void ret()
     {
         super.ret();
         FunDuration fd=funDurationStack.pop();
-        if(avgFunTimes==null){avgFunTimes=new HashMap<>();}
         appendMeasurement(avgFunTimes,fd.fun,fd.end());
     }
     public void jmp(String tag)
     {
-        if(tagJmpCounts==null){tagJmpCounts=new HashMap<>();}
         incrementCounter(tagJmpCounts,tag);
         super.jmp(tag);
     }
@@ -172,13 +185,11 @@ public class ProfileCPU extends CPU
     }
     public void in(String res,String port)
     {
-        if(portsIn==null){portsIn=new HashMap<>();}
         incrementCounter(portsIn,mem.getValue(port).toString());
         super.in(res,port);
     }
     public void out(String port,String data)
     {
-        if(portsOut==null){portsOut=new HashMap<>();}
         incrementCounter(portsOut,mem.getValue(port).toString());
         super.out(port,data);
     }

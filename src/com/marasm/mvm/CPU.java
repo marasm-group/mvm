@@ -22,6 +22,7 @@ public class CPU
     Queue<Variable>intQ=new LinkedList<>();//interrupts queue
     public CPU(Program p)
     {
+        init();
         programcounter=0;
         mem= new Memory(p);
         program=p;
@@ -332,6 +333,8 @@ public class CPU
             interruptCalls++;
         }
     }
+    protected void init(){}
+    public void start(){}
     public void end(){}
     public void flush(){}
 }
