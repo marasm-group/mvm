@@ -8,6 +8,7 @@ public class Command
     public String name;
     public String[] args;
     public String comment;
+    public String fullName;
 
     public Command(String str)
     {
@@ -20,6 +21,7 @@ public class Command
         else{comment=new String();}
         String[] arr=str.split(" ");
         name=arr[0];
+        fullName=name;
         compress();
         args=new String[arr.length-1];
         for(int i=1;i<arr.length;i++)

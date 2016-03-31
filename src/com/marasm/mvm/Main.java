@@ -15,6 +15,7 @@ public class Main implements ErrorHandler {
     static CPU cpu;
     static Main instance;
     static boolean debug=true;
+    static boolean profile=false;
     public static void main(String[] args) {
         Options options=new Options();
         options.addOption("e",true,"marASM executable file");
@@ -24,6 +25,7 @@ public class Main implements ErrorHandler {
         options.addOption("debugPort",true,"port to listen for remote debugger");
         options.addOption("javaOut",true,"java output file (if this option si set, mvm will not execute program)");
         options.addOption("devicePort",true,"act like device server for other programs on selected port");
+        options.addOption("profile",false,"run program profiling (WARNING: this will slow down execution)");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -64,6 +66,10 @@ public class Main implements ErrorHandler {
             deviceServer(cmd.getOptionValue("devicePort"));
             System.exit(0);
         }
+        if(cmd.hasOption("profile"))
+        {
+            profile=true;
+        }
         if(cmd.hasOption("e"))
         {
             execute(cmd.getOptionValue("e"),javaout);
@@ -96,7 +102,11 @@ public class Main implements ErrorHandler {
     {
         prepare(javaOut==null);
         Program p=new Program(path);
-        if(javaOut==null){cpu=new CPU(p);}
+        if(javaOut==null)
+        {
+            if(profile){cpu=new ProfileCPU(p);}
+            else{cpu=new CPU(p);}
+        }
         else{cpu=new JavaCPU(p,javaOut);}
         cpu.debug=debug;
         while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())

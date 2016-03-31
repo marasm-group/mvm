@@ -57,4 +57,9 @@ public class Utils
         str = str.replaceAll("\\\\\\\\", "\\");
         return str;
     }
+
+    public static String lastPathComponent(String path)
+    {
+        return new File(path).getName();
+    }
 }

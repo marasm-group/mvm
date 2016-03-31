@@ -23,6 +23,7 @@ public class Program
     Map<String,Long> functions,tags;
     Map<String,JSONObject> filesLoaded;
     public ArrayList<String> initializationFunctions;
+    public String mainFileKey="";
 
     public Program()
     {
@@ -87,6 +88,7 @@ public class Program
     }
     public void loadFile(String path)
     {
+        if(filesLoaded.size()==0){mainFileKey=path;}
         if(filesLoaded.get(path)!=null){return;}
         ArrayList<String>file;
         try {
