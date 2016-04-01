@@ -135,9 +135,14 @@ public class ProfileCPU extends CPU
     }
     public void call(String fun)
     {
-
-        incrementCounter(funCallsCounts,fun);
-        funDurationStack.push(new FunDuration(fun));
+        String realFun=fun;
+        if(!fun.startsWith("$"))
+        {
+            long pcVal=mem.getValue(fun).longValue();
+            realFun=program.getCommand(pcVal).name;
+        }
+        incrementCounter(funCallsCounts,realFun);
+        funDurationStack.push(new FunDuration(realFun));
         super.call(fun);
         maxCallStack= Math.max(maxCallStack,callStack.size());
     }
@@ -149,6 +154,12 @@ public class ProfileCPU extends CPU
     }
     public void jmp(String tag)
     {
+        String realTag=tag;
+        if(!tag.startsWith("@"))
+        {
+            long pcVal=mem.getValue(tag).longValue();
+            realTag=program.getCommand(pcVal).name;
+        }
         incrementCounter(tagJmpCounts,tag);
         super.jmp(tag);
     }
