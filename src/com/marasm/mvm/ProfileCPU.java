@@ -35,7 +35,11 @@ public class ProfileCPU extends CPU
     public ProfileCPU(Program p)
     {
         super(p);
-        Runtime.runFinalizersOnExit(true);
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                saveReport();
+            }
+        });
     }
     Map<String,Long> instrCounts;
     Map<String,Long> funCallsCounts;
@@ -271,8 +275,5 @@ public class ProfileCPU extends CPU
             e.printStackTrace();
             System.out.println("failed to save profiling report:\n"+profileReport.toString());
         }
-    }
-    protected void finalize() throws Throwable {
-        saveReport();
     }
 }
