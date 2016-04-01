@@ -109,6 +109,7 @@ public class Main implements ErrorHandler {
         }
         else{cpu=new JavaCPU(p,javaOut);}
         cpu.debug=debug;
+        CPUDevice cpuDevice=new CPUDevice(cpu);
         while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())
         {
             long oldPC=cpu.programcounter;
