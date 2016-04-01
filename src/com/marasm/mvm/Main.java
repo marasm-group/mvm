@@ -26,6 +26,7 @@ public class Main implements ErrorHandler {
         options.addOption("javaOut",true,"java output file (if this option si set, mvm will not execute program)");
         options.addOption("devicePort",true,"act like device server for other programs on selected port");
         options.addOption("profile",false,"run program profiling (WARNING: this will slow down execution)");
+        options.addOption("version",false,"print version number and exit");
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = null;
         try {
@@ -34,6 +35,11 @@ public class Main implements ErrorHandler {
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("mvm", options);
             System.exit(127);
+        }
+        if(cmd.hasOption("version"))
+        {
+            System.out.println("mvm version: "+Utils.mvmVersion());
+            System.exit(0);
         }
         if(cmd.hasOption("h"))
         {

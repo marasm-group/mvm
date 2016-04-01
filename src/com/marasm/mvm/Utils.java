@@ -1,5 +1,7 @@
 package com.marasm.mvm;
 
+import com.marasm.ppc.Variable;
+
 import java.io.File;
 import java.nio.file.Paths;
 
@@ -61,5 +63,14 @@ public class Utils
     public static String lastPathComponent(String path)
     {
         return new File(path).getName();
+    }
+    public static String mvmVersion()
+    {
+        Variable object = new Variable();
+        Package objPackage = object.getClass().getPackage();
+        //examine the package object
+        String version = objPackage.getImplementationVersion();
+        //some jars may use 'Implementation Version' entries in the manifest instead
+        return version;
     }
 }
