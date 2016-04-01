@@ -35,6 +35,7 @@ public class ProfileCPU extends CPU
     public ProfileCPU(Program p)
     {
         super(p);
+        Runtime.runFinalizersOnExit(true);
     }
     Map<String,Long> instrCounts;
     Map<String,Long> funCallsCounts;
@@ -235,6 +236,7 @@ public class ProfileCPU extends CPU
     {
         prepareReport();
         JSONObject profileReport=new JSONObject();
+        profileReport.put("program_size",program.size());
         profileReport.put("halt_code",haltCode.toString());
         profileReport.put("instructions",instrCounts);
         profileReport.put("calls",funCallsCounts);
