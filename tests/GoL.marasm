@@ -1,0 +1,659 @@
+#json
+{
+"author":"SR3u",
+"dependencies":["conio","VEGA","alzheimer"],
+"compiler":"Alzheimer",
+"Alzheimer":{"types":[]}
+}
+#end
+;;; Alzheimer generated code ;;;
+push 0
+push ')'
+push 'f'
+push 'o'
+push ' '
+push 't'
+push 'r'
+push 'o'
+push 's'
+push ' '
+push 'e'
+push 'm'
+push 'o'
+push 's'
+push '('
+push ' '
+push 'e'
+push 'f'
+push 'i'
+push 'L'
+push ' '
+push 'f'
+push 'o'
+push ' '
+push 'e'
+push 'm'
+push 'a'
+push 'G'
+call $putstr
+var sx
+var sy
+push 24
+pop sx
+push 24
+pop sy
+push 1
+call $srand
+gvar cells.size
+gvar cells.access
+push sx
+push sy
+mul
+pop cells.size
+gvar cells[cells.size]
+gvar prevCells.size
+gvar prevCells.access
+push sx
+push sy
+mul
+pop prevCells.size
+gvar prevCells[prevCells.size]
+var x
+var y
+gvar alive
+gvar dead
+push 255
+push 255
+push 255
+call $color
+pop alive
+push 0
+push 0
+push 0
+call $color
+pop dead
+push 0
+pop y
+var __ALZ_WHILE0
+@__ALZ_WHILE0
+push y
+push sy
+call $less
+pop __ALZ_WHILE0
+jz __ALZ_WHILE0 @__ALZ_WEND0
+push 0
+pop x
+var __ALZ_WHILE1
+@__ALZ_WHILE1
+push x
+push sx
+call $less
+pop __ALZ_WHILE1
+jz __ALZ_WHILE1 @__ALZ_WEND1
+call $randCell
+push x
+push y
+push sx
+push sy
+call $arrIdx
+pop cells.access
+pop cells[cells.access]
+push x
+push 1
+add
+pop x
+jmp @__ALZ_WHILE1
+@__ALZ_WEND1
+delv __ALZ_WHILE1
+push y
+push 1
+add
+pop y
+jmp @__ALZ_WHILE0
+@__ALZ_WEND0
+delv __ALZ_WHILE0
+var rectangle.origin.x
+var rectangle.origin.y
+var rectangle.size.w
+var rectangle.size.h
+push 10
+pop rectangle.size.w
+push 10
+pop rectangle.size.h
+var temp
+var __ALZ_WHILE2
+@__ALZ_WHILE2
+push 1
+pop __ALZ_WHILE2
+jz __ALZ_WHILE2 @__ALZ_WEND2
+push 0
+pop temp
+var __ALZ_WHILE3
+@__ALZ_WHILE3
+push temp
+push cells.size
+call $less
+pop __ALZ_WHILE3
+jz __ALZ_WHILE3 @__ALZ_WEND3
+push temp
+pop cells.access
+push cells[cells.access]
+push temp
+pop prevCells.access
+pop prevCells[prevCells.access]
+push temp
+push 1
+add
+pop temp
+jmp @__ALZ_WHILE3
+@__ALZ_WEND3
+delv __ALZ_WHILE3
+push 0
+pop y
+var __ALZ_WHILE4
+@__ALZ_WHILE4
+push y
+push sy
+call $less
+pop __ALZ_WHILE4
+jz __ALZ_WHILE4 @__ALZ_WEND4
+push 0
+pop x
+var __ALZ_WHILE5
+@__ALZ_WHILE5
+push x
+push sx
+call $less
+pop __ALZ_WHILE5
+jz __ALZ_WHILE5 @__ALZ_WEND5
+push x
+push y
+push sx
+push sy
+call $setCell
+push x
+push y
+push sx
+push sy
+call $arrIdx
+pop cells.access
+pop cells[cells.access]
+push x
+push y
+push sx
+push sy
+call $arrIdx
+pop cells.access
+push cells[cells.access]
+call $setColor
+push rectangle.size.w
+push x
+mul
+pop rectangle.origin.x
+push rectangle.size.h
+push y
+mul
+pop rectangle.origin.y
+push rectangle.origin.x
+push rectangle.origin.y
+push rectangle.size.w
+push rectangle.size.h
+call $drawRect
+push x
+push 1
+add
+pop x
+jmp @__ALZ_WHILE5
+@__ALZ_WEND5
+delv __ALZ_WHILE5
+push y
+push 1
+add
+pop y
+jmp @__ALZ_WHILE4
+@__ALZ_WEND4
+delv __ALZ_WHILE4
+jmp @__ALZ_WHILE2
+@__ALZ_WEND2
+delv __ALZ_WHILE2
+halt 0
+$randCell
+var des
+var res
+call $rand
+push 2
+call $mod
+pop des
+var __ALZ_IFVAR0
+push des
+push 1
+call $more
+pop __ALZ_IFVAR0
+jnz __ALZ_IFVAR0 @__ALZ_IF0
+jz __ALZ_IFVAR0 @__ALZ_ELSE0
+@__ALZ_IF0
+push alive
+ret
+jmp @__ALZ_END0
+@__ALZ_ELSE0
+push dead
+ret
+@__ALZ_END0
+delv __ALZ_IFVAR0
+ret
+halt 0
+$setCell
+var x
+var y
+var sx
+var sy
+pop sy
+pop sx
+pop y
+pop x
+var count
+var =
+var 0
+var __ALZ_IFVAR1
+push x
+push 1
+sub
+push y
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR1
+jnz __ALZ_IFVAR1 @__ALZ_IF1
+jz __ALZ_IFVAR1 @__ALZ_ELSE1
+@__ALZ_IF1
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END1
+@__ALZ_ELSE1
+@__ALZ_END1
+delv __ALZ_IFVAR1
+var __ALZ_IFVAR2
+push x
+push 1
+add
+push y
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR2
+jnz __ALZ_IFVAR2 @__ALZ_IF2
+jz __ALZ_IFVAR2 @__ALZ_ELSE2
+@__ALZ_IF2
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END2
+@__ALZ_ELSE2
+@__ALZ_END2
+delv __ALZ_IFVAR2
+var __ALZ_IFVAR3
+push x
+push y
+push 1
+sub
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR3
+jnz __ALZ_IFVAR3 @__ALZ_IF3
+jz __ALZ_IFVAR3 @__ALZ_ELSE3
+@__ALZ_IF3
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END3
+@__ALZ_ELSE3
+@__ALZ_END3
+delv __ALZ_IFVAR3
+var __ALZ_IFVAR4
+push x
+push y
+push 1
+add
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR4
+jnz __ALZ_IFVAR4 @__ALZ_IF4
+jz __ALZ_IFVAR4 @__ALZ_ELSE4
+@__ALZ_IF4
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END4
+@__ALZ_ELSE4
+@__ALZ_END4
+delv __ALZ_IFVAR4
+var __ALZ_IFVAR5
+push x
+push 1
+sub
+push y
+push 1
+sub
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR5
+jnz __ALZ_IFVAR5 @__ALZ_IF5
+jz __ALZ_IFVAR5 @__ALZ_ELSE5
+@__ALZ_IF5
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END5
+@__ALZ_ELSE5
+@__ALZ_END5
+delv __ALZ_IFVAR5
+var __ALZ_IFVAR6
+push x
+push 1
+add
+push y
+push 1
+add
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR6
+jnz __ALZ_IFVAR6 @__ALZ_IF6
+jz __ALZ_IFVAR6 @__ALZ_ELSE6
+@__ALZ_IF6
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END6
+@__ALZ_ELSE6
+@__ALZ_END6
+delv __ALZ_IFVAR6
+var __ALZ_IFVAR7
+push x
+push 1
+sub
+push y
+push 1
+add
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR7
+jnz __ALZ_IFVAR7 @__ALZ_IF7
+jz __ALZ_IFVAR7 @__ALZ_ELSE7
+@__ALZ_IF7
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END7
+@__ALZ_ELSE7
+@__ALZ_END7
+delv __ALZ_IFVAR7
+var __ALZ_IFVAR8
+push x
+push 1
+add
+push y
+push 1
+sub
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push alive
+call $eq
+pop __ALZ_IFVAR8
+jnz __ALZ_IFVAR8 @__ALZ_IF8
+jz __ALZ_IFVAR8 @__ALZ_ELSE8
+@__ALZ_IF8
+push count
+push 1
+add
+pop count
+jmp @__ALZ_END8
+@__ALZ_ELSE8
+@__ALZ_END8
+delv __ALZ_IFVAR8
+var __ALZ_IFVAR9
+push x
+push y
+push sx
+push sy
+call $arrIdx
+pop prevCells.access
+push prevCells[prevCells.access]
+push dead
+call $eq
+pop __ALZ_IFVAR9
+jnz __ALZ_IFVAR9 @__ALZ_IF9
+jz __ALZ_IFVAR9 @__ALZ_ELSE9
+@__ALZ_IF9
+var __ALZ_IFVAR10
+push count
+push 3
+call $eq
+pop __ALZ_IFVAR10
+jnz __ALZ_IFVAR10 @__ALZ_IF10
+jz __ALZ_IFVAR10 @__ALZ_ELSE10
+@__ALZ_IF10
+push alive
+ret
+jmp @__ALZ_END10
+@__ALZ_ELSE10
+push dead
+ret
+@__ALZ_END10
+delv __ALZ_IFVAR10
+jmp @__ALZ_END9
+@__ALZ_ELSE9
+var __ALZ_IFVAR11
+push count
+push 2
+call $eq
+pop __ALZ_IFVAR11
+jnz __ALZ_IFVAR11 @__ALZ_IF11
+jz __ALZ_IFVAR11 @__ALZ_ELSE11
+@__ALZ_IF11
+push alive
+ret
+jmp @__ALZ_END11
+@__ALZ_ELSE11
+var __ALZ_IFVAR12
+push count
+push 3
+call $eq
+pop __ALZ_IFVAR12
+jnz __ALZ_IFVAR12 @__ALZ_IF12
+jz __ALZ_IFVAR12 @__ALZ_ELSE12
+@__ALZ_IF12
+push alive
+ret
+jmp @__ALZ_END12
+@__ALZ_ELSE12
+push dead
+ret
+@__ALZ_END12
+delv __ALZ_IFVAR12
+push dead
+ret
+@__ALZ_END11
+delv __ALZ_IFVAR11
+ret
+halt 0
+$arrIdx
+var x
+var y
+var sx
+var sy
+pop sy
+pop sx
+pop y
+pop x
+var __ALZ_IFVAR13
+push x
+push sx
+call $moreeq
+pop __ALZ_IFVAR13
+jnz __ALZ_IFVAR13 @__ALZ_IF13
+jz __ALZ_IFVAR13 @__ALZ_ELSE13
+@__ALZ_IF13
+push x
+push sx
+call $mod
+pop x
+jmp @__ALZ_END13
+@__ALZ_ELSE13
+@__ALZ_END13
+delv __ALZ_IFVAR13
+var __ALZ_IFVAR14
+push y
+push sy
+call $moreeq
+pop __ALZ_IFVAR14
+jnz __ALZ_IFVAR14 @__ALZ_IF14
+jz __ALZ_IFVAR14 @__ALZ_ELSE14
+@__ALZ_IF14
+push y
+push sy
+call $mod
+pop y
+jmp @__ALZ_END14
+@__ALZ_ELSE14
+@__ALZ_END14
+delv __ALZ_IFVAR14
+var __ALZ_IFVAR15
+push x
+push 0
+call $less
+pop __ALZ_IFVAR15
+jnz __ALZ_IFVAR15 @__ALZ_IF15
+jz __ALZ_IFVAR15 @__ALZ_ELSE15
+@__ALZ_IF15
+push sx
+push 1
+sub
+pop x
+jmp @__ALZ_END15
+@__ALZ_ELSE15
+@__ALZ_END15
+delv __ALZ_IFVAR15
+var __ALZ_IFVAR16
+push y
+push 0
+call $less
+pop __ALZ_IFVAR16
+jnz __ALZ_IFVAR16 @__ALZ_IF16
+jz __ALZ_IFVAR16 @__ALZ_ELSE16
+@__ALZ_IF16
+push sy
+push 1
+sub
+pop y
+jmp @__ALZ_END16
+@__ALZ_ELSE16
+@__ALZ_END16
+delv __ALZ_IFVAR16
+push x
+push y
+push sx
+mul
+add
+ret
+ret
+halt 0
+$color
+var r
+var g
+var b
+pop b
+pop g
+pop r
+push b
+push g
+push 256
+mul
+push r
+push 65536
+mul
+add
+add
+ret
+ret
+halt 0
+$srand
+var r
+pop r
+gvar __RAND
+push r
+pop __RAND
+ret
+halt 0
+$rand
+push 65539
+push __RAND
+mul
+push 2147483648
+call $mod
+pop __RAND
+push __RAND
+push 2147483.648
+div
+ret
+ret
+halt 0
+$mod
+var a
+var b
+pop b
+pop a
+push a
+push a
+push b
+div
+floor
+push b
+mul
+sub
+ret
+ret
+halt 0 ; end of code generation

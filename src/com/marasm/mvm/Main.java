@@ -106,32 +106,40 @@ public class Main implements ErrorHandler {
     }
     static void execute(String path,String javaOut)
     {
-        prepare(javaOut==null);
-        Program p=new Program(path);
-        if(javaOut==null)
-        {
-            if(profile){cpu=new ProfileCPU(p);}
-            else{cpu=new CPU(p);}
+        try {
+            prepare(javaOut == null);
+            Program p = new Program(path);
+            if (javaOut == null) {
+                if (profile) {
+                    cpu = new ProfileCPU(p);
+                } else {
+                    cpu = new CPU(p);
+                }
+            } else {
+                cpu = new JavaCPU(p, javaOut);
+            }
+            cpu.debug = debug;
+            CPUDevice cpuDevice = new CPUDevice(cpu);
+            while (cpu.programcounter < cpu.program.size() && !cpu.isHalted()) {
+                long oldPC = cpu.programcounter;
+                cpu.exec(cpu.program.getCommand(cpu.programcounter));
+                if (cpu.programcounter == oldPC) {
+                    cpu.programcounter++;
+                }
+            }
+            if (javaOut != null) {
+                cpu.end();
+                cpu.flush();
+                System.out.println("Compiled to " + javaOut);
+                System.exit(0);
+            }
+            System.out.println("press return key to exit or just kill this process");
+            System.in.read();
         }
-        else{cpu=new JavaCPU(p,javaOut);}
-        cpu.debug=debug;
-        CPUDevice cpuDevice=new CPUDevice(cpu);
-        while (cpu.programcounter<cpu.program.size()&&!cpu.isHalted())
-        {
-            long oldPC=cpu.programcounter;
-            cpu.exec(cpu.program.getCommand(cpu.programcounter));
-            if(cpu.programcounter==oldPC){cpu.programcounter++;}
+        catch (Exception e) {
+            Log.error(e);
+            e.printStackTrace();
         }
-        if(javaOut!=null)
-        {
-            cpu.end();
-            cpu.flush();
-            System.out.println("Compiled to "+javaOut);
-            System.exit(0);
-        }
-        System.out.println("press return key to exit or just kill this process");
-        try {System.in.read();}
-        catch (IOException e) {e.printStackTrace();}
     }
 
     public void error()
