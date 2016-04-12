@@ -1,6 +1,6 @@
 #json
 {
-"author":"SR3u",
+"author":"vhq473",
 "dependencies":["conio","VEGA","alzheimer"],
 "compiler":"Alzheimer",
 "Alzheimer":{"types":[]}
@@ -116,9 +116,9 @@ var rectangle.origin.x
 var rectangle.origin.y
 var rectangle.size.w
 var rectangle.size.h
-push 10
+push 2
 pop rectangle.size.w
-push 10
+push 2
 pop rectangle.size.h
 var temp
 var __ALZ_WHILE2
