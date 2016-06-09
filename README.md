@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/marasm-group/mvm.svg?branch=master)](https://travis-ci.org/marasm-group/mvm)
+[![Build Status](https://travis-ci.org/marasm-group/mvm.svg?branch=master)](https://travis-ci.org/marasm-group/mvm)   [![Issue Count](https://codeclimate.com/github/marasm-group/mvm/badges/issue_count.svg)](https://codeclimate.com/github/marasm-group/mvm)
 # README #
 This is a [marASM](https://github.com/marasm-group/mvm/wiki/marASM-syntax) virtual machine. For more info see [the wiki](https://github.com/marasm-group/mvm/wiki).
 ![Logo](https://raw.githubusercontent.com/marasm-group/mvm/master/logo.png)
