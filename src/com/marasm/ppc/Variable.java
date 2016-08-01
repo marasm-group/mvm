@@ -10,6 +10,7 @@ public class Variable
 {
     BigDecimal value;
     public Variable(){this(new BigDecimal(0));}
+    public Variable(boolean value){this(new BigDecimal(value ? 1 : 0));}
     public Variable(BigDecimal val){value=new BigDecimal(val.toString());}
     public Variable(Variable var){this(var.value);}
     public Variable(String str)

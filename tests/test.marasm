@@ -4,10 +4,28 @@
 #json
 {
     "author":"SR3u",
-    "dependencies":["debIO"],
+    "dependencies":["mem"],
     "init":""
 }
 #end
+var addr
+push 10
+call $alloc
+pop addr
+push 10
+call $alloc
+pop addr
+push 0
+call $free
+push 5
+call $alloc
+pop addr
+push 2
+call $alloc
+pop addr
+;trace
+print addr
+halt 0
 var f
 var t
 @loop
